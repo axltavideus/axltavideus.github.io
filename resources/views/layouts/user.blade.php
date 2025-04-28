@@ -14,7 +14,11 @@
 </head>
 <body>
 <header>
-    <a href="#" class="logo"><i class="ri-wallet-3-line"></i><span>Logo</span></a>
+    <a href="#" class="logo">
+            <div class="logo-pill">
+                <img src="{{ asset('images/logo-penipu.png') }}" alt="Logo" class="logo-img">
+            </div>
+    </a>
     <ul class="navbar">
         <li><a href="#" class="active">Home</a></li>
         <li><a href="{{ url('/topup') }}">Cek ID</a></li>
@@ -102,6 +106,23 @@ header{
     font-size: 28px;
     margin-right: 3px;
 }
+.logo-pill {
+    background: linear-gradient(135deg, #ffffff, #F4B446);
+    padding: 8px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    width: 100px;
+    height: 80px;
+}
+.logo-img {
+    width: 50px;
+    height: 80px;
+    object-fit: contain;
+}
+
 .logo span{
     color: var(--text-color);
     font-size: 1.7rem;
