@@ -5,10 +5,10 @@
 @section('content')
     <section class="hero-section">
         <div class="content">
-            <h1>Explore <br><span>Cek Keamanan akun kamu secara gratis</span></h1>
-            <p>Explore the secrets of space. Wenstein helps you to check<br> digital galaxies of top-up and deals.</p>
+            <h1>Cek dan Lapor!<br><span>Cek Keamanan akun kamu secara gratis!</span></h1>
+            <p>Web wenstein store tempat kamu cek keamanan akun mu,<br> dan cek keamanan akun yang mau kamu beli </p>
             <div class="center-btn">
-                <button class="btn-hero"><span>&gt;</span> Cek ID Akun</button>
+                <button class="btn-hero"><span><i class="fas fa-search"></i></span> Cek ID Akun</button>
                 <button class="btn-secondary">Lapor</button>
             </div>
         </div>

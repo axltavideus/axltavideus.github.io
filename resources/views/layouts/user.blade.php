@@ -8,6 +8,7 @@
     <title>@yield('title')</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,7 +36,10 @@
             <li><a href="#">Contacts</a></li>
         </ul>
         <div class="main">
-
+            <a href="{{ url('/login') }}" class="btn-header">
+                <img src="{{ asset('images/ws-topup.png') }}" alt="User Icon">
+                <span>Top Up</span>
+            </a>
             <div class="bx bx-menu" id="menu-icon"></div>
 
         </div>
@@ -315,6 +319,37 @@
 
         main {
             flex: 1;
+        }
+
+        .btn-header {
+            display: flex;
+            align-items: center;
+            background-color: #F4B446;
+            color: #ffffff !important;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-header img {
+            width: 30px;
+            height: 22px;
+            margin-right: 8px;
+        }
+
+        .btn-header:hover {
+            background-color: #F4B446;
+            color: #4E4E50;
+            /* Warna hover */
+        }
+
+        @media (max-width: 1090px) {
+            .btn-header {
+                display: none;
+            }
         }
     </style>
     <script>
