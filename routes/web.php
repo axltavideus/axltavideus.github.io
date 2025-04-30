@@ -7,5 +7,5 @@ Route::get('/report', [DangerousAccountController::class, 'create'])->name('dang
 Route::post('/report', [DangerousAccountController::class, 'store'])->name('dangerous.store');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
