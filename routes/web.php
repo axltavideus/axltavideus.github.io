@@ -14,3 +14,5 @@ Route::get('/', function () {
 });
 
 Route::get('/kasus', [App\Http\Controllers\DangerousAccountController::class, 'index'])->name('dangerous.index');
+
+Route::view('/contacts', 'contacts')->name('contacts');
