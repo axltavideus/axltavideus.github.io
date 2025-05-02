@@ -46,4 +46,26 @@ class DangerousAccountController extends Controller
 
         return redirect()->back()->with('success', 'Laporan berhasil dikirim!');
     }
+
+    public function cekIdForm()
+    {
+        return view('cek_id');
+    }
+
+    public function cekIdSubmit(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|string',
+        ]);
+
+        $inputId = $request->input('id');
+        $dangerousAccount = DangerousAccount::where('id', $inputId)->first();
+
+        $mlId = $dangerousAccount ? $dangerousAccount->ml_id : null;
+
+        return view('cek_id', [
+            'inputId' => $inputId,
+            'mlId' => $mlId,
+        ]);
+    }
 }

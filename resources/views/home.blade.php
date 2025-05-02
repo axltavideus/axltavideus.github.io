@@ -22,7 +22,7 @@
             /* ubah ke kiri */
             justify-content: center;
             padding: 120px 12% 60px;
-            background-image: url('{{ asset('images/bg-home2.png') }}');
+            background-image: url('{{ asset("images/bg-home2.png") }}');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
