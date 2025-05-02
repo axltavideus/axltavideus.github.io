@@ -16,7 +16,7 @@
             <h2>Langkah-Langkah Melaporkan Akun Penipuan</h2>
             <div class="card" style="background-image: url({{ asset('images/Logo.png') }})">
                 <h1 class="heading-card">Anne</h1>
-                <p class="info">Perfect cinematic click posted by Anne on pintrest</p>
+                <p class="info">Perfect cinematic click posted by Anne on Pinterest</p>
             </div>
             <div class="card" style="background-image: url({{ asset('images/Logo.png') }})">
                 <h1 class="heading-card">Hebe</h1>
@@ -41,7 +41,7 @@
             align-items: flex-start;
             justify-content: center;
             padding: 120px 12% 60px;
-            background-image: url('{{ asset('images/bg-home4.png') }}');
+            background-image: url("{{ asset('images/bg-home4.png') }}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
