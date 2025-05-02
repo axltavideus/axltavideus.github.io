@@ -6,5 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class DangerousAccount extends Model
 {
-    //
+    protected $fillable = [
+        'ml_id',
+        'server_id',
+        'pelaku_nickname',
+        'korban_nickname',
+        'tanggal_kejadian',
+        'bukti_file_path',
+        'kronologi',
+    ];
 }

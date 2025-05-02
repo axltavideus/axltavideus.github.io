@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('images/Logo.png') }}" type="image/png">
     <title>@yield('title')</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ENjdO4Dr2bkBIFxQpeoYz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,11 +30,11 @@
             </div>
         </a>
         <ul class="navbar">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="{{ url('/topup') }}">Cek ID</a></li>
-            <li><a href="#">Kasus</a></li>
-            <li><a href="#">Lapor</a></li>
-            <li><a href="#">Contacts</a></li>
+            <li><a href="{{ url('') }}" class="active">Home</a></li>
+            <li><a href="{{ url('/cek-id') }}">Cek ID</a></li>
+            <li><a href="{{ url('/kasus') }}">Kasus</a></li>
+            <li><a href="{{ url('/report') }}">Lapor</a></li>
+            <li><a href="{{ url('/contacts') }}">Contacts</a></li>
         </ul>
         <div class="main">
             <a href="{{ url('/login') }}" class="btn-header">
@@ -45,9 +46,11 @@
         </div>
     </header>
 
+<body>
     <main>
         @yield('content')
     </main>
+</body>
 
     <footer>
         <div class="footer-content">
@@ -350,7 +353,10 @@
             navbar.classList.toggle('open');
         }
     </script>
-    <script src="{ asset('js/app.js') }"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-QF0s0X0x3pbbR6Zb6+6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b6b" crossorigin="anonymous"></script>
 </body>
 
+
 </html>
+
