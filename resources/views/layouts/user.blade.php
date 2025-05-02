@@ -128,17 +128,6 @@
             margin-right: 3px;
         }
 
-        /* .logo-pill {
-            background: linear-gradient(135deg, #ffffff, #F4B446);
-            padding: 8px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 10px;
-            width: 100px;
-            height: 80px;
-        } */
 
         .logo-img {
             width: 80px;
