@@ -29,9 +29,9 @@
             </div>
         </a>
         <ul class="navbar">
-            <li><a href="#" class="active">Home</a></li>
+            <li><a href="{{ url('') }}" class="active">Home</a></li>
             <li><a href="{{ url('/cek-id') }}">Cek ID</a></li>
-            <li><a href="#">Kasus</a></li>
+            <li><a href="{{ url('/kasus') }}">Kasus</a></li>
             <li><a href="{{ url('/report') }}">Lapor</a></li>
             <li><a href="#">Contacts</a></li>
         </ul>

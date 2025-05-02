@@ -47,7 +47,7 @@
             </div>
             <div class="col-12">
                 <label for="bukti_kasus" class="form-label fw-semibold text-warning">Bukti Kasus (jpg, jpeg, png, pdf max 2MB)</label>
-                <input type="file" name="bukti_kasus" id="bukti_kasus" accept=".jpg,.jpeg,.png,.pdf" class="form-control" />
+                <input type="file" name="bukti_kasus[]" id="bukti_kasus" accept=".jpg,.jpeg,.png,.pdf" class="form-control" multiple />
             </div>
             <div class="col-12">
                 <label for="kronologi" class="form-label fw-semibold text-warning">Kronologi</label>
@@ -58,5 +58,10 @@
             </div>
         </form>
     </div>
-    <!-- <?php phpinfo(); ?> -->
 @endsection
+
+<style>
+    .container {
+        margin-top: 100px;
+    }
+</style>

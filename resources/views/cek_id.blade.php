@@ -18,10 +18,21 @@
         <button type="submit" class="btn btn-primary">Cek</button>
     </form>
 
-    @isset($mlId)
-        @if($mlId)
-            <div class="alert alert-success">
-                <strong>ML ID ditemukan:</strong> {{ $mlId }}
+    @isset($dangerousAccount)
+        @if($dangerousAccount)
+            <div class="card mb-4 p-3 bg-light border border-warning rounded alert">
+                <h4>Detail Akun Berbahaya</h4>
+                <p><strong>ML ID:</strong> {{ $dangerousAccount->ml_id }}</p>
+                <p><strong>Server ID:</strong> {{ $dangerousAccount->server_id ?? '-' }}</p>
+                <p><strong>Pelaku Nickname:</strong> {{ $dangerousAccount->pelaku_nickname ?? '-' }}</p>
+                <p><strong>Korban Nickname:</strong> {{ $dangerousAccount->korban_nickname ?? '-' }}</p>
+                <p><strong>Tanggal Kejadian:</strong> {{ $dangerousAccount->tanggal_kejadian ?? '-' }}</p>
+                <p><strong>Kronologi:</strong> {{ $dangerousAccount->kronologi ?? '-' }}</p>
+                @if($dangerousAccount->bukti_file_path)
+                    <p><strong>Bukti File:</strong> <a href="{{ asset('storage/' . $dangerousAccount->bukti_file_path) }}" target="_blank">Lihat Bukti</a></p>
+                @else
+                    <p><strong>Bukti File:</strong> Tidak ada bukti file.</p>
+                @endif
             </div>
         @else
             <div class="alert alert-danger">
@@ -31,3 +42,9 @@
     @endisset
 </div>
 @endsection
+
+<style>
+    .container {
+        margin-top: 100px;
+    }
+</style>

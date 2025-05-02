@@ -12,3 +12,5 @@ Route::post('/cek-id', [DangerousAccountController::class, 'cekIdSubmit'])->name
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/kasus', [App\Http\Controllers\DangerousAccountController::class, 'index'])->name('dangerous.index');
