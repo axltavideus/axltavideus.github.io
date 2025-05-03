@@ -46,4 +46,54 @@ class DangerousAccountController extends Controller
 
         return redirect()->back()->with('success', 'Laporan berhasil dikirim!');
     }
+
+    public function cekIdForm()
+    {
+        return view('cek_id');
+    }
+
+    public function cekIdSubmit(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|string',
+        ]);
+
+        $inputId = $request->input('id');
+        $dangerousAccount = DangerousAccount::where('ml_id', $inputId)->first();
+
+        return view('cek_id', [
+            'inputId' => $inputId,
+            'dangerousAccount' => $dangerousAccount,
+        ]);
+    }
+
+    public function index(Request $request)
+    {
+        $sortableFields = [
+            'ml_id',
+            'server_id',
+            'pelaku_nickname',
+            'korban_nickname',
+            'tanggal_kejadian',
+        ];
+
+        $sortBy = $request->query('sort_by');
+        $sortOrder = $request->query('sort_order', 'asc');
+
+        if (!in_array($sortBy, $sortableFields)) {
+            $sortBy = 'tanggal_kejadian';
+        }
+
+        if (!in_array(strtolower($sortOrder), ['asc', 'desc'])) {
+            $sortOrder = 'asc';
+        }
+
+        $dangerousAccounts = DangerousAccount::orderBy($sortBy, $sortOrder)->get();
+
+        return view('kasus', [
+            'dangerousAccounts' => $dangerousAccounts,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
+        ]);
+    }
 }
