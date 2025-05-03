@@ -12,25 +12,28 @@
     </section>
 
     <section class="report-steps">
-        <div class="container-steps">
+        <div class="container">
             <h2>Langkah-Langkah Melaporkan Akun Penipuan</h2>
-            <div class="card" style="background-image: url({{ asset('images/Logo.png') }})">
-                <h1 class="heading-card">Anne</h1>
-                <p class="info">Perfect cinematic click posted by Anne on Pinterest</p>
-            </div>
-            <div class="card" style="background-image: url({{ asset('images/Logo.png') }})">
-                <h1 class="heading-card">Hebe</h1>
-                <p class="info">Asthatic click posted by Hebe on pintrest</p>
-            </div>
-            <div class="card" style="background-image: url({{ asset('images/Logo.png') }})">
-                <h1 class="heading-card">Dream</h1>
-                <p class="info">Dreams concept click posted by Ana on pintrest</p>
-            </div>
-            <div class="card" style="background-image: url({{ asset('images/Logo.png') }})">
-                <h1 class="heading-card">Dewi</h1>
-                <p class="info">Portrait click posted by Dewi on pintrest .</p>
+            <div class="step-cards">
+                <div class="step-card" style="background-image: url({{ asset('images/cardimg1.png') }})">
+                    <h1 class="heading-card">Cek ID </h1>
+                    <p class="info-card">Klik cek id di navigation bar dan cek id mu</p>
+                </div>
+                <div class="step-card" style="background-image: url({{ asset('images/Cardimg2.png') }})">
+                    <h1 class="heading-card">Klik Lapor</h1>
+                    <p class="info-card">Apabila tidak ada, klik lapor di navigation bar</p>
+                </div>
+                <div class="step-card" style="background-image: url({{ asset('images/Cardimg3.png') }})">
+                    <h1 class="heading-card">Isi Form</h1>
+                    <p class="info-card">Isi form yang disediakan</p>
+                </div>
+                <div class="step-card" style="background-image: url({{ asset('images/Cardimg4.png') }})">
+                    <h1 class="heading-card">Submit</h1>
+                    <p class="info-card">dan klik kirim laporan, dan laporanmu terkirim</p>
+                </div>
             </div>
         </div>
+
     </section>
 
 
@@ -118,46 +121,58 @@
             font-size: 2.5rem;
             margin-bottom: 40px;
             font-family: 'Poppins', sans-serif;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
+            color: #F4B446;
         }
 
         .step-card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            padding: 24px;
-            transition: box-shadow 0.3s ease;
-            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            height: 270px;
+            width: 90px;
+            margin: 0 15px;
             text-align: center;
-            /* center content */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .step-icon {
-            font-size: 2rem;
-            color: #F4B446;
-            margin-bottom: 16px;
-        }
-
-        .step-card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 12px;
-        }
-
-        .step-card p {
-            font-size: 1rem;
-            line-height: 1.5;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 5px -137px 60px -47px rgba(0, 0, 0, 0.75) inset, 2px 15px 20px -9px rgba(0, 0, 0, 0.75);
+            transition: all 300ms ease;
         }
 
         .step-card:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            /* gold shadow on hover */
+            width: 190px;
+        }
+
+        .step-cards {
+            display: flex;
+            /* height: 100vh; */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .heading-card {
+            color: #ffffff;
+            font-size: 22px;
+            position: relative;
+            top: 58%;
+            transform: rotate(90deg);
+            transition: all 300ms ease;
+        }
+
+        .step-card:hover .heading-card {
+            transform: rotate(0deg);
+        }
+
+        .info-card {
+            color: #ffffff;
+            font-size: 10px;
+            position: relative;
+            top: 100%;
+            transition: all 300ms ease;
+            margin: 0 10px;
+        }
+
+        .step-card:hover .info-card {
+            top: 60%;
         }
     </style>
 
