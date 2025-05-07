@@ -26,7 +26,8 @@
         <form action="{{ route('dangerous.store') }}" method="POST" enctype="multipart/form-data" class="row g-3">
             @csrf
             <div class="col-12">
-                <label for="ml_id" class="form-label fw-semibold text-warning">ML ID <span class="text-danger">*</span></label>
+                <label for="ml_id" class="form-label fw-semibold text-warning">ML ID <span
+                        class="text-danger">*</span></label>
                 <input type="text" name="ml_id" id="ml_id" value="{{ old('ml_id') }}" required class="form-control" />
             </div>
             <div class="col-12">
@@ -35,19 +36,24 @@
             </div>
             <div class="col-12">
                 <label for="pelaku_nickname" class="form-label fw-semibold text-warning">Pelaku Nickname</label>
-                <input type="text" name="pelaku_nickname" id="pelaku_nickname" value="{{ old('pelaku_nickname') }}" class="form-control" />
+                <input type="text" name="pelaku_nickname" id="pelaku_nickname" value="{{ old('pelaku_nickname') }}"
+                    class="form-control" />
             </div>
             <div class="col-12">
                 <label for="korban_nickname" class="form-label fw-semibold text-warning">Korban Nickname</label>
-                <input type="text" name="korban_nickname" id="korban_nickname" value="{{ old('korban_nickname') }}" class="form-control" />
+                <input type="text" name="korban_nickname" id="korban_nickname" value="{{ old('korban_nickname') }}"
+                    class="form-control" />
             </div>
             <div class="col-12">
                 <label for="tanggal_kejadian" class="form-label fw-semibold text-warning">Tanggal Kejadian</label>
-                <input type="date" name="tanggal_kejadian" id="tanggal_kejadian" value="{{ old('tanggal_kejadian') }}" class="form-control" />
+                <input type="date" name="tanggal_kejadian" id="tanggal_kejadian" value="{{ old('tanggal_kejadian') }}"
+                    class="form-control" />
             </div>
             <div class="col-12">
-                <label for="bukti_kasus" class="form-label fw-semibold text-warning">Bukti Kasus (jpg, jpeg, png, pdf max 2MB)</label>
-                <input type="file" name="bukti_kasus[]" id="bukti_kasus" accept=".jpg,.jpeg,.png,.pdf" class="form-control" multiple />
+                <label for="bukti_kasus" class="form-label fw-semibold text-warning">Bukti Kasus (jpg, jpeg, png max
+                    2MB)</label>
+                <input type="file" name="bukti_kasus[]" id="bukti_kasus" accept=".jpg,.jpeg,.png" class="form-control"
+                    multiple />
             </div>
             <div class="col-12">
                 <label for="kronologi" class="form-label fw-semibold text-warning">Kronologi</label>
