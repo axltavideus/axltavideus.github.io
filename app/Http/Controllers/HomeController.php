@@ -9,8 +9,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // Fetch the last 10 dangerous accounts from the database
-        $kasus = DangerousAccount::latest()->take(10)->get();
+        // Fetch the last 5 dangerous accounts from the database
+        $kasus = DangerousAccount::latest()->take(5)->get();
 
         // Pass the data to the home view
         return view('home', compact('kasus'));
