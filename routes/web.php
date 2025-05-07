@@ -14,6 +14,7 @@ Route::post('/cek-id', [DangerousAccountController::class, 'cekIdSubmit'])->name
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/kasus', [App\Http\Controllers\DangerousAccountController::class, 'index'])->name('dangerous.index');
+Route::get('/kasus/{id}', [App\Http\Controllers\DangerousAccountController::class, 'show'])->name('dangerous.show');
 
 Route::view('/contacts', 'contacts')->name('contacts');
 
