@@ -15,7 +15,7 @@
                 <div class="text-danger mt-1">{{ $message }}</div>
             @enderror
         </div>
-        <button type="submit" class="btn btn-primary">Cek</button>
+        <button type="submit" class="btn btn-warning">Cek</button>
     </form>
 
     @isset($dangerousAccount)

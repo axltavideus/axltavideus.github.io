@@ -41,6 +41,7 @@
     <div class="sidebar">
         <h4 class="text-center mb-4">Admin Panel</h4>
         <a href="{{ route('admin.dangerous_accounts.index') }}" class="{{ request()->routeIs('admin.dangerous_accounts.*') ? 'active' : '' }}">Dangerous Accounts</a>
+        <a href="{{ route('admin.dangerous_phone_numbers.index') }}" class="{{ request()->routeIs('admin.dangerous_phone_numbers.*') ? 'active' : '' }}">Dangerous Phone Numbers</a>
         <form method="POST" action="{{ route('admin.logout') }}" class="mt-4 px-3">
             @csrf
             <button type="submit" class="btn btn-warning w-100">Logout</button>

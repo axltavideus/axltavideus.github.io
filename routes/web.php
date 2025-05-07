@@ -39,4 +39,19 @@ Route::middleware([AuthenticateAdmin::class])->group(function () {
         Route::put('/{id}', [DangerousAccountController::class, 'adminUpdate'])->name('update');
         Route::delete('/{id}', [DangerousAccountController::class, 'adminDestroy'])->name('destroy');
     });
+
+    // Admin routes for dangerous phone numbers management
+    Route::prefix('admin/dangerous-phone-numbers')->name('admin.dangerous_phone_numbers.')->group(function () {
+        Route::get('/', [App\Http\Controllers\DangerousPhoneNumberController::class, 'adminIndex'])->name('index');
+        Route::get('/create', [App\Http\Controllers\DangerousPhoneNumberController::class, 'adminCreate'])->name('create');
+        Route::post('/', [App\Http\Controllers\DangerousPhoneNumberController::class, 'adminStore'])->name('store');
+        Route::get('/{id}/edit', [App\Http\Controllers\DangerousPhoneNumberController::class, 'adminEdit'])->name('edit');
+        Route::put('/{id}', [App\Http\Controllers\DangerousPhoneNumberController::class, 'adminUpdate'])->name('update');
+        Route::delete('/{id}', [App\Http\Controllers\DangerousPhoneNumberController::class, 'adminDestroy'])->name('destroy');
+    });
 });
+
+use Illuminate\Http\Request;
+
+// User route for dangerous phone number search
+Route::match(['get', 'post'], '/dangerous-phone-numbers/search', [App\Http\Controllers\DangerousPhoneNumberController::class, 'userSearch'])->name('dangerous_phone_numbers.search');
