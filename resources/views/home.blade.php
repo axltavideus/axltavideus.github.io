@@ -38,68 +38,16 @@
             <h2 class="carousel-h2">KASUS TERBARU</h2>
             <div class="slider-wrapper-custom">
                 <div class="card-list-custom">
-                    <div class="card-item">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh</h2>
-                            <p class="tanggal-kasus">Contoh Examples</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
+                @foreach($kasus as $item)
+                <div class="card-item">
+                    <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset('images/temp_img.png') }}" alt="logo" class="logo-image">
+                    <div class="card-content">
+                        <h2 class="id-kasus">{{ $item->id }}</h2>
+                        <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
+                        <button class="btn-hero">Lihat Kasus</button>
                     </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh2</h2>
-                            <p class="tanggal-kasus">Contoh Examples2</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh3</h2>
-                            <p class="tanggal-kasus">Contoh Examples3</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh4</h2>
-                            <p class="tanggal-kasus">Contoh Examples4</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh</h2>
-                            <p class="tanggal-kasus">Contoh Examples</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh</h2>
-                            <p class="tanggal-kasus">Contoh Examples</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh</h2>
-                            <p class="tanggal-kasus">Contoh Examples</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
+                </div>
+                @endforeach
                 </div>
             </div>
         </div>
@@ -284,20 +232,21 @@
             width: max-content;
         }
 
-        .card-list-custom .card-item {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 20px;
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(30px);
-            min-width: 320px;
-            box-sizing: border-box;
-        }
+.card-list-custom .card-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(30px);
+    min-width: 320px;
+    box-sizing: border-box;
+    margin-right: 20px;
+}
 
         .card-item .logo-image {
             width: 90px;
@@ -355,38 +304,49 @@
         }
     </style>
 
-    <script>
-        const cardList = document.querySelector('.card-list-custom');
-        let currentIndex = 0;
-        const itemWidth = 320;
-        const visibleCount = 3;
+<script>
+    const cardList = document.querySelector('.card-list-custom');
+    const cards = cardList.children;
+    const itemWidth = 320;
+    const visibleCount = 3;
+    let currentIndex = 0;
 
-        function slideNext() {
-            const maxIndex = cardList.children.length - visibleCount;
-            if (currentIndex < maxIndex) {
-                currentIndex++;
-            } else {
+    // Clone first visibleCount cards and append to the end for smooth looping
+    for (let i = 0; i < visibleCount; i++) {
+        const clone = cards[i].cloneNode(true);
+        cardList.appendChild(clone);
+    }
+
+    function slideNext() {
+        currentIndex++;
+        cardList.style.transition = 'transform 0.5s ease-in-out';
+        cardList.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+
+        if (currentIndex === cards.length - visibleCount) {
+            setTimeout(() => {
+                cardList.style.transition = 'none';
                 currentIndex = 0;
-            }
-            cardList.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+                cardList.style.transform = `translateX(0px)`;
+            }, 500); // match transition duration
         }
+    }
 
-        let autoSlide = setInterval(slideNext, 1000);
+    let autoSlide = setInterval(slideNext, 3000);
 
-        const carouselContainer = document.querySelector('.slider-wrapper-custom');
-        carouselContainer.addEventListener('mouseover', () => {
-            if (autoSlide) {
-                clearInterval(autoSlide);
-                autoSlide = null;
-            }
-        });
+    const carouselContainer = document.querySelector('.slider-wrapper-custom');
+    carouselContainer.addEventListener('mouseover', () => {
+        if (autoSlide) {
+            clearInterval(autoSlide);
+            autoSlide = null;
+        }
+    });
 
-        carouselContainer.addEventListener('mouseout', () => {
-            if (!autoSlide) {
-                autoSlide = setInterval(slideNext, 3000);
-            }
-        });
-    </script>
+    carouselContainer.addEventListener('mouseout', () => {
+        if (!autoSlide) {
+            autoSlide = setInterval(slideNext, 3000);
+        }
+    });
+</script>
 
 @endsection
 <!-- </content>
