@@ -17,17 +17,19 @@ class DangerousAccountController extends Controller
     {
         $request->validate([
             'ml_id' => 'required',
-            'bukti_kasus' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048', // max 2MB
+            'bukti_kasus' => 'nullable|array',
+            'bukti_kasus.*' => 'file|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         try {
-            $buktiPath = null;
+            $buktiPaths = [];
             if ($request->hasFile('bukti_kasus')) {
-                $file = $request->file('bukti_kasus');
-                $buktiPath = $file->store('bukti', 'public');
-                Log::info('File stored at: ' . $buktiPath);
+                foreach ($request->file('bukti_kasus') as $file) {
+                    $buktiPaths[] = $file->store('bukti', 'public');
+                }
+                Log::info('Files stored at: ' . implode(', ', $buktiPaths));
             } else {
-                Log::info('No file uploaded.');
+                Log::info('No files uploaded.');
             }
 
             DangerousAccount::create([
@@ -36,12 +38,12 @@ class DangerousAccountController extends Controller
                 'pelaku_nickname' => $request->pelaku_nickname,
                 'korban_nickname' => $request->korban_nickname,
                 'tanggal_kejadian' => $request->tanggal_kejadian,
-                'bukti_file_path' => $buktiPath,
+                'bukti_file_path' => json_encode($buktiPaths),
                 'kronologi' => $request->kronologi,
             ]);
         } catch (\Exception $e) {
-            Log::error('Error uploading file: ' . $e->getMessage());
-            return redirect()->back()->withErrors(['upload_error' => 'Error uploading file: ' . $e->getMessage()])->withInput();
+            Log::error('Error uploading files: ' . $e->getMessage());
+            return redirect()->back()->withErrors(['upload_error' => 'Error uploading files: ' . $e->getMessage()])->withInput();
         }
 
         return redirect()->back()->with('success', 'Laporan berhasil dikirim!');
@@ -78,7 +80,52 @@ class DangerousAccountController extends Controller
         ];
 
         $sortBy = $request->query('sort_by');
+        $sortOrder = $request->query('sort_order', 'desc'); // default to desc for latest first
+        $search = $request->query('search', '');
+
+        if (!in_array($sortBy, $sortableFields)) {
+            $sortBy = 'tanggal_kejadian';
+        }
+
+        if (!in_array(strtolower($sortOrder), ['asc', 'desc'])) {
+            $sortOrder = 'desc';
+        }
+
+        $query = DangerousAccount::query();
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('ml_id', 'like', '%' . $search . '%')
+                    ->orWhere('pelaku_nickname', 'like', '%' . $search . '%')
+                    ->orWhere('korban_nickname', 'like', '%' . $search . '%');
+            });
+        }
+
+        $dangerousAccounts = $query->orderBy($sortBy, $sortOrder)->get();
+
+        return view('kasus', [
+            'dangerousAccounts' => $dangerousAccounts,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
+            'search' => $search,
+        ]);
+    }
+
+    // Admin methods
+
+    public function adminIndex(Request $request)
+    {
+        $sortableFields = [
+            'ml_id',
+            'server_id',
+            'pelaku_nickname',
+            'korban_nickname',
+            'tanggal_kejadian',
+        ];
+
+        $sortBy = $request->query('sort_by');
         $sortOrder = $request->query('sort_order', 'asc');
+        $search = $request->query('search', '');
 
         if (!in_array($sortBy, $sortableFields)) {
             $sortBy = 'tanggal_kejadian';
@@ -88,12 +135,121 @@ class DangerousAccountController extends Controller
             $sortOrder = 'asc';
         }
 
-        $dangerousAccounts = DangerousAccount::orderBy($sortBy, $sortOrder)->get();
+        $query = DangerousAccount::query();
 
-        return view('kasus', [
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('ml_id', 'like', '%' . $search . '%')
+                    ->orWhere('pelaku_nickname', 'like', '%' . $search . '%')
+                    ->orWhere('korban_nickname', 'like', '%' . $search . '%');
+            });
+        }
+
+        $dangerousAccounts = $query->orderBy($sortBy, $sortOrder)->get();
+
+        return view('admin.dangerous_accounts.index', [
             'dangerousAccounts' => $dangerousAccounts,
             'sortBy' => $sortBy,
             'sortOrder' => $sortOrder,
+            'search' => $search,
         ]);
+    }
+
+    public function adminCreate()
+    {
+        return view('admin.dangerous_accounts.create');
+    }
+
+    public function adminStore(Request $request)
+    {
+        $request->validate([
+            'ml_id' => 'required',
+            'bukti_kasus' => 'nullable|array',
+            'bukti_kasus.*' => 'file|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        try {
+            $buktiPaths = [];
+            if ($request->hasFile('bukti_kasus')) {
+                foreach ($request->file('bukti_kasus') as $file) {
+                    $buktiPaths[] = $file->store('bukti', 'public');
+                }
+            }
+
+            DangerousAccount::create([
+                'ml_id' => $request->ml_id,
+                'server_id' => $request->server_id,
+                'pelaku_nickname' => $request->pelaku_nickname,
+                'korban_nickname' => $request->korban_nickname,
+                'tanggal_kejadian' => $request->tanggal_kejadian,
+                'bukti_file_path' => json_encode($buktiPaths),
+                'kronologi' => $request->kronologi,
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['upload_error' => 'Error uploading files: ' . $e->getMessage()])->withInput();
+        }
+
+        return redirect()->route('admin.dangerous_accounts.index')->with('success', 'Dangerous account created successfully!');
+    }
+
+    public function adminEdit($id)
+    {
+        $dangerousAccount = DangerousAccount::findOrFail($id);
+        return view('admin.dangerous_accounts.edit', compact('dangerousAccount'));
+    }
+
+    public function adminUpdate(Request $request, $id)
+    {
+        $dangerousAccount = DangerousAccount::findOrFail($id);
+
+        $request->validate([
+            'ml_id' => 'required',
+            'bukti_kasus' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
+            'header_picture' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        try {
+            $buktiPaths = json_decode($dangerousAccount->bukti_file_path, true) ?? [];
+            if ($request->hasFile('bukti_kasus')) {
+                $file = $request->file('bukti_kasus');
+                $filePath = $file->store('bukti', 'public');
+                $buktiPaths = [$filePath]; // store as array with single file path
+            }
+
+            $headerPicturePath = $dangerousAccount->header_picture_path;
+            if ($request->hasFile('header_picture')) {
+                $headerFile = $request->file('header_picture');
+                $headerPicturePath = $headerFile->store('header_pictures', 'public');
+            }
+
+            $dangerousAccount->update([
+                'ml_id' => $request->ml_id,
+                'server_id' => $request->server_id,
+                'pelaku_nickname' => $request->pelaku_nickname,
+                'korban_nickname' => $request->korban_nickname,
+                'tanggal_kejadian' => $request->tanggal_kejadian,
+                'bukti_file_path' => json_encode($buktiPaths),
+                'header_picture_path' => $headerPicturePath,
+                'kronologi' => $request->kronologi,
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['upload_error' => 'Error uploading file: ' . $e->getMessage()])->withInput();
+        }
+
+        return redirect()->route('admin.dangerous_accounts.index')->with('success', 'Dangerous account updated successfully!');
+    }
+
+    public function adminDestroy($id)
+    {
+        $dangerousAccount = DangerousAccount::findOrFail($id);
+        $dangerousAccount->delete();
+
+        return redirect()->route('admin.dangerous_accounts.index')->with('success', 'Dangerous account deleted successfully!');
+    }
+
+    public function show($id)
+    {
+        $dangerousAccount = DangerousAccount::findOrFail($id);
+        return view('kasus_show', ['account' => $dangerousAccount]);
     }
 }

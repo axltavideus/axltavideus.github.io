@@ -13,6 +13,11 @@ class DangerousAccount extends Model
         'korban_nickname',
         'tanggal_kejadian',
         'bukti_file_path',
+        'header_picture_path',
         'kronologi',
+    ];
+
+    protected $casts = [
+        'bukti_file_path' => 'array',
     ];
 }
