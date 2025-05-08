@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DangerousAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class DangerousAccountController extends Controller
 {
@@ -249,7 +250,11 @@ class DangerousAccountController extends Controller
 
     public function show($id)
     {
-        $dangerousAccount = DangerousAccount::where('ml_id', $id)->firstOrFail();
-        return view('kasus_show', ['account' => $dangerousAccount]);
+        try {
+            $dangerousAccount = DangerousAccount::where('ml_id', $id)->firstOrFail();
+            return view('kasus_show', ['account' => $dangerousAccount]);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('dangerous.index')->with('error', 'ML ID not found.');
+        }
     }
 }

@@ -64,13 +64,17 @@
                     <input type="text" name="ml_id" placeholder="Masukkan ID Akun" required />
                     <button type="submit" class="btn-hero"><span><i class="fas fa-search"></i></span> Cari</button>
                 </form>
+                @if(session('error'))
+                    <div class="error-message" style="color: red; margin-top: 10px;">
+                        {{ session('error') }}
+                    </div>
+                @endif
             </div>
         </div>
         <div class="search-image">
             <img src="{{ asset('images/bg-sr2.png') }}" alt="Search Side Image">
         </div>
     </section>
-
 
     <style>
         .hero-section {
@@ -432,19 +436,3 @@
 </script>
 
 @endsection
-<!-- </content>
-</create_file>
-
-<attempt_completion>
-    Perbaikan sudah saya lakukan pada kode JavaScript bagian pause/resume interval carousel:
-
-    - Saat hover, interval slider dihentikan dengan memeriksa apakah interval aktif, baru clearInterval dijalankan dan
-    variabel interval diset null.
-    - Saat mouse keluar, interval hanya dibuat kembali jika tidak ada interval aktif (autoSlide null).
-    - Ini menghindari pembuatan interval ganda sehingga carousel tidak menjadi rusak saat hover.
-
-    Silakan coba kode ini, carousel sekarang harus berjalan otomatis dengan stabil dan pause saat hover tanpa
-    menyebabkan masalah bergeser berantakan.
-
-    Beritahu saya jika butuh bantu lanjut!
-</attempt_completion> -->
