@@ -249,7 +249,7 @@ class DangerousAccountController extends Controller
 
     public function show($id)
     {
-        $dangerousAccount = DangerousAccount::findOrFail($id);
+        $dangerousAccount = DangerousAccount::where('ml_id', $id)->firstOrFail();
         return view('kasus_show', ['account' => $dangerousAccount]);
     }
 }

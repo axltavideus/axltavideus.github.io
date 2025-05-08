@@ -59,8 +59,11 @@
             <h1>Cari Akun yang Aman!<br><span>Cek keamanan akun yang ingin kamu beli!</span></h1>
             <p>Masukkan ID akun di bawah ini untuk memulai pencarian.</p>
             <div class="search-input">
-                <input type="text" placeholder="Masukkan ID Akun" />
-                <button class="btn-hero"><span><i class="fas fa-search"></i></span> Cari</button>
+                <form method="POST" action="{{ route('search.ml_id') }}">
+                    @csrf
+                    <input type="text" name="ml_id" placeholder="Masukkan ID Akun" required />
+                    <button type="submit" class="btn-hero"><span><i class="fas fa-search"></i></span> Cari</button>
+                </form>
             </div>
         </div>
         <div class="search-image">

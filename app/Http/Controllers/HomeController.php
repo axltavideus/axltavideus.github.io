@@ -15,4 +15,15 @@ class HomeController extends Controller
         // Pass the data to the home view
         return view('home', compact('kasus'));
     }
+
+    public function searchMlId(Request $request)
+    {
+        $request->validate([
+            'ml_id' => 'required|string',
+        ]);
+
+        $mlId = $request->input('ml_id');
+
+        return redirect()->route('dangerous.show', ['id' => $mlId]);
+    }
 }

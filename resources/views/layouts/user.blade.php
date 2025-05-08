@@ -33,7 +33,6 @@
         </a>
         <ul class="navbar">
             <li><a href="{{ url('') }}" class="active">Home</a></li>
-            <li><a href="{{ url('/cek-id') }}">Cek ID</a></li>
             <li><a href="{{ url('/kasus') }}">Kasus</a></li>
             <li><a href="{{ url('/report') }}">Lapor</a></li>
             <li><a href="{{ url('/dangerous-phone-numbers/search') }}">Nomor Penipu</a></li>
