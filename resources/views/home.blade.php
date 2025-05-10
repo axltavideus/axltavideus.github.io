@@ -38,16 +38,17 @@
             <h2 class="carousel-h2">KASUS TERBARU</h2>
             <div class="slider-wrapper-custom">
                 <div class="card-list-custom">
-                @foreach($kasus as $item)
-                <div class="card-item">
-                    <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                    <div class="card-content">
-                        <h2 class="id-kasus">{{ $item->id }}</h2>
-                        <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
-                        <button class="btn-hero">Lihat Kasus</button>
-                    </div>
-                </div>
-                @endforeach
+                    @foreach($kasus as $item)
+                        <div class="card-item">
+                            <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset('images/temp_img.png') }}"
+                                alt="logo" class="logo-image">
+                            <div class="card-content">
+                                <h2 class="id-kasus">{{ $item->id }}</h2>
+                                <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
+                                <button class="btn-hero">Lihat Kasus</button>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -56,7 +57,9 @@
 
     <section class="search-section">
         <div class="content">
-            <h1>Cari Akun yang Aman!<br><span>Cek keamanan akun yang ingin kamu beli!</span></h1>
+            <div class="search-title">
+                <h1>Cari Akun yang Aman!<br><span>Cek keamanan akun yang ingin kamu beli!</span></h1>
+            </div>
             <p>Masukkan ID akun di bawah ini untuk memulai pencarian.</p>
             <div class="search-input">
                 <input type="text" placeholder="Masukkan ID Akun" />
@@ -246,21 +249,21 @@
             width: max-content;
         }
 
-.card-list-custom .card-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(30px);
-    min-width: 320px;
-    box-sizing: border-box;
-    margin-right: 20px;
-}
+        .card-list-custom .card-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(30px);
+            min-width: 320px;
+            box-sizing: border-box;
+            margin-right: 20px;
+        }
 
         .card-item .logo-image {
             width: 90px;
@@ -355,6 +358,18 @@
             flex-wrap: wrap;
         }
 
+        .search-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            /* Ubah warna jadi putih */
+            text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.9);
+            /* Shadow warna gold */
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
         .search-input input:hover {
             box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8);
         }
@@ -384,49 +399,49 @@
         }
     </style>
 
-<script>
-    const cardList = document.querySelector('.card-list-custom');
-    const cards = cardList.children;
-    const itemWidth = 320;
-    const visibleCount = 3;
-    let currentIndex = 0;
+    <script>
+        const cardList = document.querySelector('.card-list-custom');
+        const cards = cardList.children;
+        const itemWidth = 320;
+        const visibleCount = 3;
+        let currentIndex = 0;
 
-    // Clone first visibleCount cards and append to the end for smooth looping
-    for (let i = 0; i < visibleCount; i++) {
-        const clone = cards[i].cloneNode(true);
-        cardList.appendChild(clone);
-    }
-
-    function slideNext() {
-        currentIndex++;
-        cardList.style.transition = 'transform 0.5s ease-in-out';
-        cardList.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-
-        if (currentIndex === cards.length - visibleCount) {
-            setTimeout(() => {
-                cardList.style.transition = 'none';
-                currentIndex = 0;
-                cardList.style.transform = `translateX(0px)`;
-            }, 500); // match transition duration
+        // Clone first visibleCount cards and append to the end for smooth looping
+        for (let i = 0; i < visibleCount; i++) {
+            const clone = cards[i].cloneNode(true);
+            cardList.appendChild(clone);
         }
-    }
 
-    let autoSlide = setInterval(slideNext, 3000);
+        function slideNext() {
+            currentIndex++;
+            cardList.style.transition = 'transform 0.5s ease-in-out';
+            cardList.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
 
-    const carouselContainer = document.querySelector('.slider-wrapper-custom');
-    carouselContainer.addEventListener('mouseover', () => {
-        if (autoSlide) {
-            clearInterval(autoSlide);
-            autoSlide = null;
+            if (currentIndex === cards.length - visibleCount) {
+                setTimeout(() => {
+                    cardList.style.transition = 'none';
+                    currentIndex = 0;
+                    cardList.style.transform = `translateX(0px)`;
+                }, 500); // match transition duration
+            }
         }
-    });
 
-    carouselContainer.addEventListener('mouseout', () => {
-        if (!autoSlide) {
-            autoSlide = setInterval(slideNext, 3000);
-        }
-    });
-</script>
+        let autoSlide = setInterval(slideNext, 3000);
+
+        const carouselContainer = document.querySelector('.slider-wrapper-custom');
+        carouselContainer.addEventListener('mouseover', () => {
+            if (autoSlide) {
+                clearInterval(autoSlide);
+                autoSlide = null;
+            }
+        });
+
+        carouselContainer.addEventListener('mouseout', () => {
+            if (!autoSlide) {
+                autoSlide = setInterval(slideNext, 3000);
+            }
+        });
+    </script>
 
 @endsection
 <!-- </content>

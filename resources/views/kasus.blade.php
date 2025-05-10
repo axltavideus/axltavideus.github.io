@@ -22,14 +22,14 @@
                     <div class="col">
                         <div class="card bg-dark text-white h-100 d-flex align-items-center justify-content-center">
                             <div class="mb-4 text-center" style="width: 100%; height: 300px; overflow: hidden;">
-                                <img src="{{ asset('storage/' . $account->header_picture_path) }}"
-                                    alt="Header Picture"
+                                <img src="{{ asset('storage/' . $account->header_picture_path) }}" alt="Header Picture"
                                     style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
 
                             <div class="card-body text-center">
-                            <h5 class="card-title">ML ID: {{ $account->ml_id }}</h5>
-                            <h5 class="card-title">PUBLISH DATE: {{ \Carbon\Carbon::parse($account->created_at)->format('d-m-Y') }}</h5>
+                                <h5 class="card-title">ML ID: {{ $account->ml_id }}</h5>
+                                <h5 class="card-title">PUBLISH DATE:
+                                    {{ \Carbon\Carbon::parse($account->created_at)->format('d-m-Y') }}</h5>
                                 <a href="{{ route('dangerous.show', $account->id) }}"
                                     class="btn custom-btn fw-semibold px-4 py-2 mt-3">Lihat Detail</a>
                             </div>
@@ -49,18 +49,18 @@
     }
 
     .container {
-        margin-top: 100px; 
+        margin-top: 100px;
         color: var(--text-color) !important;
     }
 
     .custom-btn {
         background-color: var(--text-color) !important;
-        color: #000; 
+        color: #000;
         border: none;
     }
 
     .custom-btn:hover {
-        background-color:rgb(255, 187, 0)!important;
+        background-color: rgb(255, 187, 0) !important;
         color: #fff;
     }
 </style>
