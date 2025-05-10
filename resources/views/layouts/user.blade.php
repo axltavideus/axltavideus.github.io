@@ -66,10 +66,10 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/contact">Contact</a></li>
+                    <li><i class="fa-solid fa-arrow-right"></i><a href="/">Home</a></li>
+                    <li><i class="fa-solid fa-arrow-right"></i><a href="/about">About</a></li>
+                    <li><i class="fa-solid fa-arrow-right"></i><a href="/services">Services</a></li>
+                    <li><i class="fa-solid fa-arrow-right"></i><a href="/contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -267,8 +267,8 @@
         footer {
             background-color: #333;
             color: white;
-            padding: 2rem 0;
-            text-align: center;
+            padding: 40px 20px;
+            font-size:16px;
         }
 
         .footer-content {
@@ -279,10 +279,24 @@
 
         .footer-section {
             max-width: 300px;
+            
         }
 
         .footer-section h3 {
-            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            width: 110px;
+            background: linear-gradient(to right, rgba(244, 180, 70, 0.3), #F4B446);
+            border-radius: 2px;
         }
 
         .footer-section ul {
@@ -294,8 +308,12 @@
             margin-bottom: 0.5rem;
         }
 
+        .footer-section i {
+            margin-right: 10px;
+        }
+
         .footer-section ul li a {
-            color: white;
+            color: #FFF;
             text-decoration: none;
         }
 

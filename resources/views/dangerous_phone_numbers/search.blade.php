@@ -8,14 +8,13 @@
 
     <form action="{{ route('dangerous_phone_numbers.search') }}" method="POST" class="mb-4">
         @csrf
-        <div class="mb-3">
-            <label for="search" class="form-label">Masukkan Nomor Telepon atau Kata Kunci</label>
-            <input type="text" name="search" id="search" class="form-control" value="{{ old('search', $search ?? '') }}" required>
-            @error('search')
-                <div class="text-danger mt-1">{{ $message }}</div>
-            @enderror
+        <div class="input-group input-group-lg mb-3">
+            <input type="text" placeholder="Masukan Nomor Telepon atau Kata Kunci" name="search" id="search" class="form-control" value="{{ old('search', $search ?? '') }}" required>
+            <button type="submit" class="btn btn-warning">Cek</button>
         </div>
-        <button type="submit" class="btn btn-warning">Cek</button>
+        @error('search')
+            <div class="text-danger mt-1">{{ $message }}</div>
+        @enderror
     </form>
 
     @isset($dangerousPhoneNumbers)
@@ -52,5 +51,10 @@
 <style>
     .container {
         margin-top: 100px;
+    }
+
+        
+    h1.text-warning {
+        color: #F4B446 !important;
     }
 </style>
