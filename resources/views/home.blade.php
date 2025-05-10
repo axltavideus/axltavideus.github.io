@@ -54,6 +54,20 @@
 
     </section>
 
+    <section class="search-section">
+        <div class="content">
+            <h1>Cari Akun yang Aman!<br><span>Cek keamanan akun yang ingin kamu beli!</span></h1>
+            <p>Masukkan ID akun di bawah ini untuk memulai pencarian.</p>
+            <div class="search-input">
+                <input type="text" placeholder="Masukkan ID Akun" />
+                <button class="btn-hero"><span><i class="fas fa-search"></i></span> Cari</button>
+            </div>
+        </div>
+        <div class="search-image">
+            <img src="{{ asset('images/bg-sr2.png') }}" alt="Search Side Image">
+        </div>
+    </section>
+
 
     <style>
         .hero-section {
@@ -62,7 +76,7 @@
             align-items: flex-start;
             justify-content: center;
             padding: 120px 12% 60px;
-            background-image: url("{{ asset('images/bg-home4.png') }}");
+            background-image: url("{{ asset('images/bg-home5.png') }}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -130,7 +144,7 @@
         .report-steps {
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(244, 180, 70, 0.9));
             color: #333;
-            padding: 80px 12%;
+            padding: 180px 12%;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
@@ -214,9 +228,9 @@
 
         .container-carousel {
             margin: 0;
-            padding: 0;
             box-sizing: border-box;
             overflow: hidden;
+            padding: 0;
         }
 
         .slider-wrapper-custom {
@@ -301,6 +315,72 @@
                 2px 2px 4px rgba(255, 255, 255, 0.5);
             /* bayangan hitam samar */
 
+        }
+
+        .search-section {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 120px 12%;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(244, 180, 70, 0.9));
+            text-align: left;
+            gap: 4rem;
+        }
+
+        .search-section .content {
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .search-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+
+            object-fit: contain;
+        }
+
+        .search-input {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-input input:hover {
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8);
+        }
+
+        .search-input input {
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #F4B446;
+            border-radius: 8px;
+            flex: 1;
+        }
+
+        .search-input .btn-hero {
+            background-color: var(--text-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-input .btn-hero:hover {
+            background-color: #d9992b;
         }
     </style>
 
