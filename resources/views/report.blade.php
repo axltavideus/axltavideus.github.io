@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="server_id" class="form-label fw-bold text-warning fs-5">Server ID <span class="text-danger">*</span></label>
-                        <input type="text" placeholder="Masukan ID Server" name="server_id" id="server_id" value="{{ old('server_id') }}" required vclass="form-control form-control-lg" />
+                        <input type="text" placeholder="Masukan ID Server" name="server_id" id="server_id" value="{{ old('server_id') }}" required class="form-control form-control-lg" />
                     </div>
                     <div class="col-md-6">
                         <label for="pelaku_nickname" class="form-label fw-bold text-warning fs-5">Pelaku Nickname <span class="text-danger">*</span></label>
