@@ -6,13 +6,19 @@
     <div class="container py-5">
         <h1 class="mb-4 fw-bold">Daftar Akun Berbahaya</h1>
 
-        <div class="mb-4">
-            <form method="GET" action="{{ route('dangerous.index') }}" class="d-flex align-items-center gap-2">
-                <input type="text" name="search" class="form-control form-control-lg" placeholder="Masukkan ML ID..."
-                    value="{{ old('search', $search ?? '') }}">
-                <button type="submit" class="btn custom-btn text-black fw-semibold px-4 py-2">Search</button>
-            </form>
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
         </div>
+    @endif
+
+    <div class="mb-4">
+        <form method="GET" action="{{ route('dangerous.index') }}" class="d-flex align-items-center gap-2">
+            <input type="text" name="search" class="form-control" placeholder="Masukkan ML ID..."
+                value="{{ old('search', $search ?? '') }}">
+            <button type="submit" class="btn btn-warning text-black fw-semibold px-4 py-2">Search</button>
+        </form>
+    </div>
 
         @if($dangerousAccounts->isEmpty())
             <p>Tidak ada akun berbahaya yang ditemukan.</p>

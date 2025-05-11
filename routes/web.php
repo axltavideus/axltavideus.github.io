@@ -16,7 +16,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/kasus', [App\Http\Controllers\DangerousAccountController::class, 'index'])->name('dangerous.index');
 Route::get('/kasus/{id}', [App\Http\Controllers\DangerousAccountController::class, 'show'])->name('dangerous.show');
 
-Route::view('/contacts', 'contacts')->name('contacts');
+Route::get('/contacts', [App\Http\Controllers\HomeController::class, 'contacts'])->name('contacts');
 
 // Admin login routes
 Route::get('/admin/login', [LoginController::class, 'showLoginForm'])->name('admin.login');
@@ -49,9 +49,21 @@ Route::middleware([AuthenticateAdmin::class])->group(function () {
         Route::put('/{id}', [App\Http\Controllers\DangerousPhoneNumberController::class, 'adminUpdate'])->name('update');
         Route::delete('/{id}', [App\Http\Controllers\DangerousPhoneNumberController::class, 'adminDestroy'])->name('destroy');
     });
+
+    // Admin routes for grup jual beli cards management
+    Route::prefix('admin/grup-jual-beli-cards')->name('admin.grup_jual_beli_cards.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'index'])->name('index');
+        Route::get('/create', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'create'])->name('create');
+        Route::post('/', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'store'])->name('store');
+        Route::get('/{grupJualBeliCard}/edit', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'edit'])->name('edit');
+        Route::put('/{grupJualBeliCard}', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'update'])->name('update');
+        Route::delete('/{grupJualBeliCard}', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'destroy'])->name('destroy');
+    });
 });
 
 use Illuminate\Http\Request;
 
 // User route for dangerous phone number search
+Route::post('/search-ml-id', [App\Http\Controllers\HomeController::class, 'searchMlId'])->name('search.ml_id');
+
 Route::match(['get', 'post'], '/dangerous-phone-numbers/search', [App\Http\Controllers\DangerousPhoneNumberController::class, 'userSearch'])->name('dangerous_phone_numbers.search');

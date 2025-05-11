@@ -38,17 +38,16 @@
             <h2 class="carousel-h2">KASUS TERBARU</h2>
             <div class="slider-wrapper-custom">
                 <div class="card-list-custom">
-                    @foreach($kasus as $item)
-                        <div class="card-item">
-                            <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset('images/temp_img.png') }}"
-                                alt="logo" class="logo-image">
-                            <div class="card-content">
-                                <h2 class="id-kasus">{{ $item->id }}</h2>
-                                <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
-                                <button class="btn-hero">Lihat Kasus</button>
-                            </div>
-                        </div>
-                    @endforeach
+                @foreach($kasus as $item)
+                <div class="card-item">
+                    <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset('images/temp_img.png') }}" alt="logo" class="logo-image">
+                    <div class="card-content">
+                        <h2 class="id-kasus">{{ $item->ml_id }}</h2>
+                        <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
+                        <button class="btn-hero">Lihat Kasus</button>
+                    </div>
+                </div>
+                @endforeach
                 </div>
             </div>
         </div>
@@ -62,15 +61,22 @@
             </div>
             <p>Masukkan ID akun di bawah ini untuk memulai pencarian.</p>
             <div class="search-input">
-                <input type="text" placeholder="Masukkan ID Akun" />
-                <button class="btn-hero"><span><i class="fas fa-search"></i></span> Cari</button>
+                <form method="POST" action="{{ route('search.ml_id') }}">
+                    @csrf
+                    <input type="text" name="ml_id" placeholder="Masukkan ID Akun" required />
+                    <button type="submit" class="btn-hero"><span><i class="fas fa-search"></i></span> Cari</button>
+                </form>
+                @if(session('error'))
+                    <div class="error-message" style="color: red; margin-top: 10px;">
+                        {{ session('error') }}
+                    </div>
+                @endif
             </div>
         </div>
         <div class="search-image">
             <img src="{{ asset('images/bg-sr2.png') }}" alt="Search Side Image">
         </div>
     </section>
-
 
     <style>
         .hero-section {
@@ -444,19 +450,3 @@
     </script>
 
 @endsection
-<!-- </content>
-</create_file>
-
-<attempt_completion>
-    Perbaikan sudah saya lakukan pada kode JavaScript bagian pause/resume interval carousel:
-
-    - Saat hover, interval slider dihentikan dengan memeriksa apakah interval aktif, baru clearInterval dijalankan dan
-    variabel interval diset null.
-    - Saat mouse keluar, interval hanya dibuat kembali jika tidak ada interval aktif (autoSlide null).
-    - Ini menghindari pembuatan interval ganda sehingga carousel tidak menjadi rusak saat hover.
-
-    Silakan coba kode ini, carousel sekarang harus berjalan otomatis dengan stabil dan pause saat hover tanpa
-    menyebabkan masalah bergeser berantakan.
-
-    Beritahu saya jika butuh bantu lanjut!
-</attempt_completion> -->
