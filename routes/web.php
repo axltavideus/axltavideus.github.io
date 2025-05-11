@@ -61,6 +61,16 @@ Route::middleware([AuthenticateAdmin::class])->group(function () {
         Route::put('/{grupJualBeliCard}', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'update'])->name('update');
         Route::delete('/{grupJualBeliCard}', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'destroy'])->name('destroy');
     });
+
+    // Admin routes for contact us cards management
+    Route::prefix('admin/contact-us-cards')->name('admin.contact_us_cards.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\ContactUsCardController::class, 'index'])->name('index');
+        Route::get('/create', [App\Http\Controllers\Admin\ContactUsCardController::class, 'create'])->name('create');
+        Route::post('/', [App\Http\Controllers\Admin\ContactUsCardController::class, 'store'])->name('store');
+        Route::get('/{contactUsCard}/edit', [App\Http\Controllers\Admin\ContactUsCardController::class, 'edit'])->name('edit');
+        Route::put('/{contactUsCard}', [App\Http\Controllers\Admin\ContactUsCardController::class, 'update'])->name('update');
+        Route::delete('/{contactUsCard}', [App\Http\Controllers\Admin\ContactUsCardController::class, 'destroy'])->name('destroy');
+    });
 });
 
 use Illuminate\Http\Request;

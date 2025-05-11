@@ -43,6 +43,7 @@
         <a href="{{ route('admin.dangerous_accounts.index') }}" class="{{ request()->routeIs('admin.dangerous_accounts.*') ? 'active' : '' }}">Dangerous Accounts</a>
         <a href="{{ route('admin.dangerous_phone_numbers.index') }}" class="{{ request()->routeIs('admin.dangerous_phone_numbers.*') ? 'active' : '' }}">Dangerous Phone Numbers</a>
         <a href="{{ route('admin.grup_jual_beli_cards.index') }}" class="{{ request()->routeIs('admin.grup_jual_beli_cards.*') ? 'active' : '' }}">Grup Jual Beli Cards</a>
+        <a href="{{ route('admin.contact_us_cards.index') }}" class="{{ request()->routeIs('admin.contact-us-cards.*') ? 'active' : '' }}">Contact Us Cards</a>
         <form method="POST" action="{{ route('admin.logout') }}" class="mt-4 px-3">
             @csrf
             <button type="submit" class="btn btn-warning w-100">Logout</button>
