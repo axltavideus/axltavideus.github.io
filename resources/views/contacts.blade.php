@@ -57,10 +57,3 @@
         transform: translateY(-4px);
     }
 </style>
-
-<!-- <div class="card contact-card shadow-sm" style="background-image: url('/images/ws-topup.png'); background-size: contain; background-repeat: no-repeat; background-position: center; color: white; height: 100%;">
-                    <div class="card-body text-center" style="background-color: rgba(0, 0, 0, 0.5);">
-                        <h5 class="card-title" >Weinstein Topup</h5>
-                        <p class="card-text" >Wenstein Top Up adalah tempat top up games yang aman, murah dan terpercaya. Proses cepat 1-3 Detik. Open 24 jam. Payment terlengkap. </p>
-                    </div>
-                </div> -->
