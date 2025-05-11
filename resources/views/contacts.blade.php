@@ -20,8 +20,8 @@
                         <h5 class="card-title mb-1">{{ $card->title }}</h5>
                         <p class="card-text text-muted">{{ $card->description }}</p>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
         @endforeach
     </div>
@@ -39,21 +39,30 @@
                         <p class="card-text text-muted">{{ $card->description }}</p>
                     </div>
                 </div>
-            </a>
+            @endforeach
         </div>
-        @endforeach
     </div>
-</div>
+
+
+
+
+
 @endsection
 <style>
     .container {
         margin-top: 100px;
     }
+
     .contact-card {
         transition: 0.3s ease;
     }
+
     .contact-card:hover {
         box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
         transform: translateY(-4px);
+    }
+
+    h1 {
+        color: #F4B446 !important;
     }
 </style>

@@ -403,6 +403,41 @@
         .search-input .btn-hero:hover {
             background-color: #d9992b;
         }
+
+        @media (max-width: 768px) {
+            .hero-section .content h1 {
+                font-size: 2rem;
+            }
+
+            .report-steps .step-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            .step-cards {
+                width: 100%;
+                transform: none;
+                box-shadow: none;
+            }
+
+            .card-list-custom {
+                flex-wrap: nowrap;
+                overflow-x: scroll;
+            }
+
+            .search-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .search-input {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .center-btn {
+                flex-direction: column;
+            }
+        }
     </style>
 
     <script>
