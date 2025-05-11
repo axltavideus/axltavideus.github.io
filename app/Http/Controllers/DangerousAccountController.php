@@ -16,8 +16,9 @@ class DangerousAccountController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+$request->validate([
             'ml_id' => 'required|unique:dangerous_accounts,ml_id',
+            'tanggal_kejadian' => 'nullable|date|before_or_equal:today',
             'bukti_kasus' => 'nullable|array',
             'bukti_kasus.*' => 'file|mimes:jpg,jpeg,png|max:4096',
         ]);
