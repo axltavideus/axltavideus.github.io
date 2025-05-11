@@ -38,20 +38,37 @@
             <h2 class="carousel-h2">KASUS TERBARU</h2>
             <div class="slider-wrapper-custom">
                 <div class="card-list-custom">
-                @foreach($kasus as $item)
-                <div class="card-item">
-                    <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                    <div class="card-content">
-                        <h2 class="id-kasus">{{ $item->id }}</h2>
-                        <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
-                        <button class="btn-hero">Lihat Kasus</button>
-                    </div>
-                </div>
-                @endforeach
+                    @foreach($kasus as $item)
+                        <div class="card-item">
+                            <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset('images/temp_img.png') }}"
+                                alt="logo" class="logo-image">
+                            <div class="card-content">
+                                <h2 class="id-kasus">{{ $item->id }}</h2>
+                                <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
+                                <button class="btn-hero">Lihat Kasus</button>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
 
+    </section>
+
+    <section class="search-section">
+        <div class="content">
+            <div class="search-title">
+                <h1>Cari Akun yang Aman!<br><span>Cek keamanan akun yang ingin kamu beli!</span></h1>
+            </div>
+            <p>Masukkan ID akun di bawah ini untuk memulai pencarian.</p>
+            <div class="search-input">
+                <input type="text" placeholder="Masukkan ID Akun" />
+                <button class="btn-hero"><span><i class="fas fa-search"></i></span> Cari</button>
+            </div>
+        </div>
+        <div class="search-image">
+            <img src="{{ asset('images/bg-sr2.png') }}" alt="Search Side Image">
+        </div>
     </section>
 
 
@@ -62,7 +79,7 @@
             align-items: flex-start;
             justify-content: center;
             padding: 120px 12% 60px;
-            background-image: url("{{ asset('images/bg-home4.png') }}");
+            background-image: url("{{ asset('images/bg-home5.png') }}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -130,7 +147,7 @@
         .report-steps {
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(244, 180, 70, 0.9));
             color: #333;
-            padding: 80px 12%;
+            padding: 180px 12%;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
@@ -214,9 +231,9 @@
 
         .container-carousel {
             margin: 0;
-            padding: 0;
             box-sizing: border-box;
             overflow: hidden;
+            padding: 0;
         }
 
         .slider-wrapper-custom {
@@ -232,21 +249,21 @@
             width: max-content;
         }
 
-.card-list-custom .card-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(30px);
-    min-width: 320px;
-    box-sizing: border-box;
-    margin-right: 20px;
-}
+        .card-list-custom .card-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(30px);
+            min-width: 320px;
+            box-sizing: border-box;
+            margin-right: 20px;
+        }
 
         .card-item .logo-image {
             width: 90px;
@@ -302,51 +319,129 @@
             /* bayangan hitam samar */
 
         }
+
+        .search-section {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 120px 12%;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.8), rgba(244, 180, 70, 0.9));
+            text-align: left;
+            gap: 4rem;
+        }
+
+        .search-section .content {
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .search-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .search-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+
+            object-fit: contain;
+        }
+
+        .search-input {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            /* Ubah warna jadi putih */
+            text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.9);
+            /* Shadow warna gold */
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-input input:hover {
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8);
+        }
+
+        .search-input input {
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #F4B446;
+            border-radius: 8px;
+            flex: 1;
+        }
+
+        .search-input .btn-hero {
+            background-color: var(--text-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-input .btn-hero:hover {
+            background-color: #d9992b;
+        }
     </style>
 
-<script>
-    const cardList = document.querySelector('.card-list-custom');
-    const cards = cardList.children;
-    const itemWidth = 320;
-    const visibleCount = 3;
-    let currentIndex = 0;
+    <script>
+        const cardList = document.querySelector('.card-list-custom');
+        const cards = cardList.children;
+        const itemWidth = 320;
+        const visibleCount = 3;
+        let currentIndex = 0;
 
-    // Clone first visibleCount cards and append to the end for smooth looping
-    for (let i = 0; i < visibleCount; i++) {
-        const clone = cards[i].cloneNode(true);
-        cardList.appendChild(clone);
-    }
-
-    function slideNext() {
-        currentIndex++;
-        cardList.style.transition = 'transform 0.5s ease-in-out';
-        cardList.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-
-        if (currentIndex === cards.length - visibleCount) {
-            setTimeout(() => {
-                cardList.style.transition = 'none';
-                currentIndex = 0;
-                cardList.style.transform = `translateX(0px)`;
-            }, 500); // match transition duration
+        // Clone first visibleCount cards and append to the end for smooth looping
+        for (let i = 0; i < visibleCount; i++) {
+            const clone = cards[i].cloneNode(true);
+            cardList.appendChild(clone);
         }
-    }
 
-    let autoSlide = setInterval(slideNext, 3000);
+        function slideNext() {
+            currentIndex++;
+            cardList.style.transition = 'transform 0.5s ease-in-out';
+            cardList.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
 
-    const carouselContainer = document.querySelector('.slider-wrapper-custom');
-    carouselContainer.addEventListener('mouseover', () => {
-        if (autoSlide) {
-            clearInterval(autoSlide);
-            autoSlide = null;
+            if (currentIndex === cards.length - visibleCount) {
+                setTimeout(() => {
+                    cardList.style.transition = 'none';
+                    currentIndex = 0;
+                    cardList.style.transform = `translateX(0px)`;
+                }, 500); // match transition duration
+            }
         }
-    });
 
-    carouselContainer.addEventListener('mouseout', () => {
-        if (!autoSlide) {
-            autoSlide = setInterval(slideNext, 3000);
-        }
-    });
-</script>
+        let autoSlide = setInterval(slideNext, 3000);
+
+        const carouselContainer = document.querySelector('.slider-wrapper-custom');
+        carouselContainer.addEventListener('mouseover', () => {
+            if (autoSlide) {
+                clearInterval(autoSlide);
+                autoSlide = null;
+            }
+        });
+
+        carouselContainer.addEventListener('mouseout', () => {
+            if (!autoSlide) {
+                autoSlide = setInterval(slideNext, 3000);
+            }
+        });
+    </script>
 
 @endsection
 <!-- </content>
