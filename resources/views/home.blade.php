@@ -44,7 +44,7 @@
                     <div class="card-content">
                         <h2 class="id-kasus">{{ $item->ml_id }}</h2>
                         <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
-                        <button class="btn-hero">Lihat Kasus</button>
+                        <a href="{{ route('dangerous.show', $item->ml_id) }}"><button class="btn-hero">Lihat Kasus</button></a>
                     </div>
                 </div>
                 @endforeach

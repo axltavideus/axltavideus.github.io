@@ -84,4 +84,12 @@
     label.form-label {
         color: #F4B446 !important;
     }
+
+    button.btn-warning {
+        background-color: #F4B446 !important;
+    }
+
+    button.btn-warning {
+        color: white !important;
+    }
 </style>

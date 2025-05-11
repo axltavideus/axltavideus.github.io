@@ -57,4 +57,9 @@
     h1.text-warning {
         color: #F4B446 !important;
     }
+
+    .btn-warning {
+        background-color: #F4B446 !important;
+        color: white !important;
+    }
 </style>
