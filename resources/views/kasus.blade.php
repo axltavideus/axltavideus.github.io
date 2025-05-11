@@ -36,7 +36,7 @@
                                 <h5 class="card-title">ML ID: {{ $account->ml_id }}</h5>
                                 <h5 class="card-title">PUBLISH DATE:
                                     {{ \Carbon\Carbon::parse($account->created_at)->format('d-m-Y') }}</h5>
-                                <a href="{{ route('dangerous.show', $account->id) }}"
+                                <a href="{{ route('dangerous.show', $account->ml_id) }}"
                                     class="btn custom-btn fw-semibold px-4 py-2 mt-3">Lihat Detail</a>
                             </div>
                         </div>
