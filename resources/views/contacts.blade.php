@@ -35,7 +35,7 @@
     </div>
     <div class="row justify-content-center mt-4">
         <div class="col-12 col-md-12">
-            <a href="" class="card contact-card h-100 text-decoration-none text-dark shadow-sm">
+            <a href="https://wensteintopup.com/" class="card contact-card h-100 text-decoration-none text-dark shadow-sm">
                 <div class="card-body d-flex align-items-center gap-3">
                     <img src="/images/ws-topup.png" alt="WhatsApp" style="width: 70px; height: 40px;">
                     <div>
@@ -45,6 +45,24 @@
                 </div>
             </a>
         </div>
+    </div>
+    <h2 class="text-center mt-5 mb-4 fw-bold">Grup Jual Beli</h2>
+    <div class="row justify-content-center g-4">
+        @foreach($grupJualBeliCards as $card)
+        <div class="col-12 col-md-12">
+            <a href="{{ $card->link ?? '#' }}" target="_blank" class="card contact-card h-100 text-decoration-none text-dark shadow-sm">
+                <div class="card-body d-flex align-items-center gap-3">
+                    @if($card->image_path)
+                    <img src="{{ asset('storage/' . $card->image_path) }}" alt="{{ $card->title }}" style="width: 70px; height: 40px;">
+                    @endif
+                    <div>
+                        <h5 class="card-title mb-1">{{ $card->title }}</h5>
+                        <p class="card-text text-muted">{{ $card->description }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @endforeach
     </div>
 </div>
 
