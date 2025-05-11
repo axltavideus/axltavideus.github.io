@@ -26,7 +26,7 @@
 
 <body>
     <header>
-        <a href="#" class="logo">
+        <a href="{{ url('') }}" class="logo">
             <div class="logo-pill">
                 <img src="{{ asset('images/Logo.png') }}" alt="Logo" class="logo-img">
             </div>
@@ -39,7 +39,7 @@
             <li><a href="{{ url('/contacts') }}">Contacts</a></li>
         </ul>
         <div class="main">
-            <a href="{{ url('/login') }}" class="btn-header">
+            <a href="https://wensteintopup.com/" class="btn-header">
                 <img src="{{ asset('images/ws-topup.png') }}" alt="User Icon">
                 <span>Top Up</span>
             </a>

@@ -42,7 +42,7 @@
                 <div class="card-item">
                     <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset('images/temp_img.png') }}" alt="logo" class="logo-image">
                     <div class="card-content">
-                        <h2 class="id-kasus">{{ $item->id }}</h2>
+                        <h2 class="id-kasus">{{ $item->ml_id }}</h2>
                         <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
                         <button class="btn-hero">Lihat Kasus</button>
                     </div>
@@ -253,21 +253,21 @@
             width: max-content;
         }
 
-.card-list-custom .card-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(30px);
-    min-width: 320px;
-    box-sizing: border-box;
-    margin-right: 20px;
-}
+        .card-list-custom .card-item {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(30px);
+            min-width: 320px;
+            box-sizing: border-box;
+            margin-right: 20px;
+        }
 
         .card-item .logo-image {
             width: 90px;
