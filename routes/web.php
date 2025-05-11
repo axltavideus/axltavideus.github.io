@@ -16,6 +16,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/kasus', [App\Http\Controllers\DangerousAccountController::class, 'index'])->name('dangerous.index');
 Route::get('/kasus/{id}', [App\Http\Controllers\DangerousAccountController::class, 'show'])->name('dangerous.show');
 
+Route::post('/admin/dangerous_accounts/{id}/accept', [App\Http\Controllers\DangerousAccountController::class, 'adminAccept'])->name('admin.dangerous_accounts.accept');
+
 Route::get('/contacts', [App\Http\Controllers\HomeController::class, 'contacts'])->name('contacts');
 
 // Admin login routes
@@ -24,8 +26,8 @@ Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.logi
 Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 // Admin register routes
-Route::get('/admin/register', [LoginController::class, 'showRegisterForm'])->name('admin.register');
-Route::post('/admin/register', [LoginController::class, 'register'])->name('admin.register.submit');
+Route::get('/admin/637d4f870d9f555f14ecb49ae5a5a01d', [LoginController::class, 'showRegisterForm'])->name('admin.register');
+Route::post('/admin/637d4f870d9f555f14ecb49ae5a5a01d', [LoginController::class, 'register'])->name('admin.register.submit');
 
 // Admin dashboard route protected by middleware
 Route::middleware([AuthenticateAdmin::class])->group(function () {
