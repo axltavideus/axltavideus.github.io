@@ -38,68 +38,16 @@
             <h2 class="carousel-h2">KASUS TERBARU</h2>
             <div class="slider-wrapper-custom">
                 <div class="card-list-custom">
-                    <div class="card-item">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh</h2>
-                            <p class="tanggal-kasus">Contoh Examples</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
+                @foreach($kasus as $item)
+                <div class="card-item">
+                    <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset('images/temp_img.png') }}" alt="logo" class="logo-image">
+                    <div class="card-content">
+                        <h2 class="id-kasus">{{ $item->ml_id }}</h2>
+                        <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
+                        <a href="{{ route('dangerous.show', $item->ml_id) }}"><button class="btn-hero">Lihat Kasus</button></a>
                     </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh2</h2>
-                            <p class="tanggal-kasus">Contoh Examples2</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh3</h2>
-                            <p class="tanggal-kasus">Contoh Examples3</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh4</h2>
-                            <p class="tanggal-kasus">Contoh Examples4</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh</h2>
-                            <p class="tanggal-kasus">Contoh Examples</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh</h2>
-                            <p class="tanggal-kasus">Contoh Examples</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
-
-                    <div class="card-item ">
-                        <img src="{{ asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                        <div class="card-content">
-                            <h2 class="id-kasus">Example Contoh</h2>
-                            <p class="tanggal-kasus">Contoh Examples</p>
-                            <button class="btn-hero">Lihat Kasus</button>
-                        </div>
-                    </div>
+                </div>
+                @endforeach
                 </div>
             </div>
         </div>
@@ -108,18 +56,27 @@
 
     <section class="search-section">
         <div class="content">
-            <h1>Cari Akun yang Aman!<br><span>Cek keamanan akun yang ingin kamu beli!</span></h1>
+            <div class="search-title">
+                <h1>Cari Akun yang Aman!<br><span>Cek keamanan akun yang ingin kamu beli!</span></h1>
+            </div>
             <p>Masukkan ID akun di bawah ini untuk memulai pencarian.</p>
             <div class="search-input">
-                <input type="text" placeholder="Masukkan ID Akun" />
-                <button class="btn-hero"><span><i class="fas fa-search"></i></span> Cari</button>
+                <form method="POST" action="{{ route('search.ml_id') }}">
+                    @csrf
+                    <input type="text" name="ml_id" placeholder="Masukkan ID Akun" required />
+                    <button type="submit" class="btn-hero"><span><i class="fas fa-search"></i></span> Cari</button>
+                </form>
+                @if(session('error'))
+                    <div class="error-message" style="color: red; margin-top: 10px;">
+                        {{ session('error') }}
+                    </div>
+                @endif
             </div>
         </div>
         <div class="search-image">
             <img src="{{ asset('images/bg-sr2.png') }}" alt="Search Side Image">
         </div>
     </section>
-
 
     <style>
         .hero-section {
@@ -311,6 +268,7 @@
             backdrop-filter: blur(30px);
             min-width: 320px;
             box-sizing: border-box;
+            margin-right: 20px;
         }
 
         .card-item .logo-image {
@@ -406,6 +364,18 @@
             flex-wrap: wrap;
         }
 
+        .search-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            /* Ubah warna jadi putih */
+            text-shadow: 2px 2px 5px rgba(255, 215, 0, 0.9);
+            /* Shadow warna gold */
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
         .search-input input:hover {
             box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8);
         }
@@ -433,25 +403,71 @@
         .search-input .btn-hero:hover {
             background-color: #d9992b;
         }
+
+        @media (max-width: 768px) {
+            .hero-section .content h1 {
+                font-size: 2rem;
+            }
+
+            .report-steps .step-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            .step-cards {
+                width: 100%;
+                transform: none;
+                box-shadow: none;
+            }
+
+            .card-list-custom {
+                flex-wrap: nowrap;
+                overflow-x: scroll;
+            }
+
+            .search-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .search-input {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .center-btn {
+                flex-direction: column;
+            }
+        }
     </style>
 
     <script>
         const cardList = document.querySelector('.card-list-custom');
-        let currentIndex = 0;
+        const cards = cardList.children;
         const itemWidth = 320;
         const visibleCount = 3;
+        let currentIndex = 0;
 
-        function slideNext() {
-            const maxIndex = cardList.children.length - visibleCount;
-            if (currentIndex < maxIndex) {
-                currentIndex++;
-            } else {
-                currentIndex = 0;
-            }
-            cardList.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+        // Clone first visibleCount cards and append to the end for smooth looping
+        for (let i = 0; i < visibleCount; i++) {
+            const clone = cards[i].cloneNode(true);
+            cardList.appendChild(clone);
         }
 
-        let autoSlide = setInterval(slideNext, 1000);
+        function slideNext() {
+            currentIndex++;
+            cardList.style.transition = 'transform 0.5s ease-in-out';
+            cardList.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+
+            if (currentIndex === cards.length - visibleCount) {
+                setTimeout(() => {
+                    cardList.style.transition = 'none';
+                    currentIndex = 0;
+                    cardList.style.transform = `translateX(0px)`;
+                }, 500); // match transition duration
+            }
+        }
+
+        let autoSlide = setInterval(slideNext, 3000);
 
         const carouselContainer = document.querySelector('.slider-wrapper-custom');
         carouselContainer.addEventListener('mouseover', () => {
@@ -469,19 +485,3 @@
     </script>
 
 @endsection
-<!-- </content>
-</create_file>
-
-<attempt_completion>
-    Perbaikan sudah saya lakukan pada kode JavaScript bagian pause/resume interval carousel:
-
-    - Saat hover, interval slider dihentikan dengan memeriksa apakah interval aktif, baru clearInterval dijalankan dan
-    variabel interval diset null.
-    - Saat mouse keluar, interval hanya dibuat kembali jika tidak ada interval aktif (autoSlide null).
-    - Ini menghindari pembuatan interval ganda sehingga carousel tidak menjadi rusak saat hover.
-
-    Silakan coba kode ini, carousel sekarang harus berjalan otomatis dengan stabil dan pause saat hover tanpa
-    menyebabkan masalah bergeser berantakan.
-
-    Beritahu saya jika butuh bantu lanjut!
-</attempt_completion> -->

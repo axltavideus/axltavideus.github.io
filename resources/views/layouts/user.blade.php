@@ -26,21 +26,20 @@
 
 <body>
     <header>
-        <a href="#" class="logo">
+        <a href="{{ url('') }}" class="logo">
             <div class="logo-pill">
                 <img src="{{ asset('images/Logo.png') }}" alt="Logo" class="logo-img">
             </div>
         </a>
         <ul class="navbar">
             <li><a href="{{ url('') }}" class="active">Home</a></li>
-            <li><a href="{{ url('/cek-id') }}">Cek ID</a></li>
             <li><a href="{{ url('/kasus') }}">Kasus</a></li>
             <li><a href="{{ url('/report') }}">Lapor</a></li>
             <li><a href="{{ url('/dangerous-phone-numbers/search') }}">Nomor Penipu</a></li>
             <li><a href="{{ url('/contacts') }}">Contacts</a></li>
         </ul>
         <div class="main">
-            <a href="{{ url('/login') }}" class="btn-header">
+            <a href="https://wensteintopup.com/" class="btn-header">
                 <img src="{{ asset('images/ws-topup.png') }}" alt="User Icon">
                 <span>Top Up</span>
             </a>
@@ -58,7 +57,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>About Us</h3>
+                <img src="/images/Logo.png" alt="Wenstein Store Logo" style="max-width: 120px; margin-bottom: 10px;">
                 <p>Wenstein store adalah tempat top up games yang aman, murah dan terpercaya. Proses cepat 1-3 Detik.
                     Open 24 jam. Payment terlengkap. Jika ada kendala silahkan klik logo CS di bagian kanan bawah di
                     website ini.</p>
@@ -66,16 +65,21 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/about">About</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/contact">Contact</a></li>
+                    <li><i class="fa-solid fa-arrow-right"></i><a href="/">Home</a></li>
+                    <li><i class="fa-solid fa-arrow-right"></i><a href="/about">About</a></li>
+                    <li><i class="fa-solid fa-arrow-right"></i><a href="/services">Services</a></li>
+                    <li><i class="fa-solid fa-arrow-right"></i><a href="/contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Contact Us</h3>
-                <p>Email: info@example.com</p>
-                <p>Phone: +123 456 7890</p>
+                <ul>
+                    <li><a href="https://wa.me/6285297976565"><i class="fa-brands fa-whatsapp"></i> 0852-9797-6565 (Admin Rekber)</a></li>
+                    <li><a href="https://wa.me/089630503634" target="_blank"><i class="fa-brands fa-whatsapp"></i> 0896-3050-3634 (Admin Post)</a></li>
+                    <li><a href="https://wa.me/6285257291585" target="_blank"><i class="fa-brands fa-whatsapp"></i> 0852-5729-1585 (Top Up)</a></li>
+                    <li><a href="mailto:wensteinstore@gmail.com"><i class="fa-solid fa-envelope"></i> wensteinstore@gmail.com</a></li>
+                    <li><a href="https://instagram.com/wensteinstore" target="_blank"><i class="fa-brands fa-instagram"></i> wensteinstore</a></li>
+                </ul>
             </div>
         </div>
         <div class="footer-bottom">
@@ -267,22 +271,52 @@
         footer {
             background-color: #333;
             color: white;
-            padding: 2rem 0;
-            text-align: center;
+            padding: 40px 20px;
+            font-size:16px;
         }
+
+        footer a {
+            text-decoration: none;
+            color: white; 
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: orange; 
+        }
+
 
         .footer-content {
             display: flex;
-            justify-content: space-around;
-            margin-bottom: 1rem;
+            justify-content: center; 
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+            margin: auto;
+            gap: 170px; 
+            max-width: 1200px;
         }
 
         .footer-section {
             max-width: 300px;
+            
         }
 
         .footer-section h3 {
-            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            width: 110px;
+            background: linear-gradient(to right, rgba(244, 180, 70, 0.3), #F4B446);
+            border-radius: 2px;
         }
 
         .footer-section ul {
@@ -291,17 +325,42 @@
         }
 
         .footer-section ul li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section i {
+            margin-right: 10px;
+            color: #F4B446;
         }
 
         .footer-section ul li a {
-            color: white;
+            color: #FFF;
             text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer ul li a:hover {
+            color: #F4B446; 
         }
 
         .footer-bottom {
             border-top: 1px solid #444;
             padding-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .footer-section img {
+                margin: 0 auto;
+            }
+
+            .footer-section ul li {
+                justify-content: space-around;
+            }
         }
 
         html,
