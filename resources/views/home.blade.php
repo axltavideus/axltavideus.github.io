@@ -38,16 +38,18 @@
             <h2 class="carousel-h2">KASUS TERBARU</h2>
             <div class="slider-wrapper-custom">
                 <div class="card-list-custom">
-                @foreach($kasus as $item)
-                <div class="card-item">
-                    <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset('images/temp_img.png') }}" alt="logo" class="logo-image">
-                    <div class="card-content">
-                        <h2 class="id-kasus">{{ $item->ml_id }}</h2>
-                        <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
-                        <a href="{{ route('dangerous.show', $item->ml_id) }}"><button class="btn-hero">Lihat Kasus</button></a>
-                    </div>
-                </div>
-                @endforeach
+                    @foreach($kasus as $item)
+                        <div class="card-item">
+                            <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset($item->header_picture_path)  }}"
+                                alt="logo" class="logo-image">
+                            <div class="card-content">
+                                <h2 class="id-kasus">{{ $item->ml_id }}</h2>
+                                <p class="tanggal-kasus">{{ $item->created_at->format('d M Y') }}</p>
+                                <a href="{{ route('dangerous.show', $item->ml_id) }}"><button class="btn-hero">Lihat
+                                        Kasus</button></a>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -413,6 +415,7 @@
                 flex-direction: column;
                 align-items: center;
             }
+
             .step-cards {
                 width: 100%;
                 transform: none;

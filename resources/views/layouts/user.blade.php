@@ -74,11 +74,16 @@
             <div class="footer-section">
                 <h3>Contact Us</h3>
                 <ul>
-                    <li><a href="https://wa.me/6285297976565"><i class="fa-brands fa-whatsapp"></i> 0852-9797-6565 (Admin Rekber)</a></li>
-                    <li><a href="https://wa.me/089630503634" target="_blank"><i class="fa-brands fa-whatsapp"></i> 0896-3050-3634 (Admin Post)</a></li>
-                    <li><a href="https://wa.me/6285257291585" target="_blank"><i class="fa-brands fa-whatsapp"></i> 0852-5729-1585 (Top Up)</a></li>
-                    <li><a href="mailto:wensteinstore@gmail.com"><i class="fa-solid fa-envelope"></i> wensteinstore@gmail.com</a></li>
-                    <li><a href="https://instagram.com/wensteinstore" target="_blank"><i class="fa-brands fa-instagram"></i> wensteinstore</a></li>
+                    <li><a href="https://wa.me/6285297976565"><i class="fa-brands fa-whatsapp"></i> 0852-9797-6565
+                            (Admin Rekber)</a></li>
+                    <li><a href="https://wa.me/089630503634" target="_blank"><i class="fa-brands fa-whatsapp"></i>
+                            0896-3050-3634 (Admin Post)</a></li>
+                    <li><a href="https://wa.me/6285257291585" target="_blank"><i class="fa-brands fa-whatsapp"></i>
+                            0852-5729-1585 (Top Up)</a></li>
+                    <li><a href="mailto:wensteinstore@gmail.com"><i class="fa-solid fa-envelope"></i>
+                            wensteinstore@gmail.com</a></li>
+                    <li><a href="https://instagram.com/wensteinstore" target="_blank"><i
+                                class="fa-brands fa-instagram"></i> wensteinstore</a></li>
                 </ul>
             </div>
         </div>
@@ -113,7 +118,7 @@
         }
 
         header {
-            position: absolute;
+            position: fixed;
             width: 100%;
             top: 0;
             right: 0;
@@ -272,34 +277,34 @@
             background-color: #333;
             color: white;
             padding: 40px 20px;
-            font-size:16px;
+            font-size: 16px;
         }
 
         footer a {
             text-decoration: none;
-            color: white; 
+            color: white;
             transition: color 0.3s ease;
         }
 
         footer a:hover {
-            color: orange; 
+            color: orange;
         }
 
 
         .footer-content {
             display: flex;
-            justify-content: center; 
+            justify-content: center;
             align-items: flex-start;
             flex-wrap: wrap;
             padding: 40px 20px;
             margin: auto;
-            gap: 170px; 
+            gap: 170px;
             max-width: 1200px;
         }
 
         .footer-section {
             max-width: 300px;
-            
+
         }
 
         .footer-section h3 {
@@ -340,7 +345,7 @@
         }
 
         footer ul li a:hover {
-            color: #F4B446; 
+            color: #F4B446;
         }
 
         .footer-bottom {
