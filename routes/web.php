@@ -67,3 +67,5 @@ use Illuminate\Http\Request;
 Route::post('/search-ml-id', [App\Http\Controllers\HomeController::class, 'searchMlId'])->name('search.ml_id');
 
 Route::match(['get', 'post'], '/dangerous-phone-numbers/search', [App\Http\Controllers\DangerousPhoneNumberController::class, 'userSearch'])->name('dangerous_phone_numbers.search');
+
+Route::view('/peraturan-rekber', 'peraturan')->name('peraturan');
