@@ -87,3 +87,5 @@ Route::post('/search-ml-id', [App\Http\Controllers\HomeController::class, 'searc
 Route::match(['get', 'post'], '/dangerous-phone-numbers/search', [App\Http\Controllers\DangerousPhoneNumberController::class, 'userSearch'])->name('dangerous_phone_numbers.search');
 
 Route::view('/peraturan-rekber', 'peraturan')->name('peraturan');
+
+Route::view('/cara-rekber', 'cara')->name('cara');

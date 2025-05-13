@@ -40,7 +40,7 @@
                 <div class="card-list-custom">
                     @foreach($kasus as $item)
                         <div class="card-item">
-                            <img src="{{ $item->header_picture_path ? asset($item->header_picture_path) : asset($item->header_picture_path)  }}"
+                            <img src="{{ $item->header_picture_path ? asset('storage/' . $item->header_picture_path) : asset($item->header_picture_path)  }}"
                                 alt="logo" class="logo-image">
                             <div class="card-content">
                                 <h2 class="id-kasus">{{ $item->ml_id }}</h2>
