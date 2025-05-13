@@ -47,6 +47,14 @@
             @enderror
         </div>
 
+        <div class="mb-3">
+            <label for="order" class="form-label">Order</label>
+            <input type="number" name="order" id="order" class="form-control" value="{{ old('order', $contactUsCard->order ?? 0) }}" min="0">
+            @error('order')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
         <button type="submit" class="btn btn-warning">Update Card</button>
         <a href="{{ route('admin.contact_us_cards.index') }}" class="btn btn-secondary">Cancel</a>
     </form>

@@ -43,6 +43,8 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
+                    <a href="{{ route('admin.contact_us_cards.moveUp', $card) }}" class="btn btn-sm btn-secondary" title="Move Up"><i class="fas fa-arrow-up"></i></a>
+                    <a href="{{ route('admin.contact_us_cards.moveDown', $card) }}" class="btn btn-sm btn-secondary" title="Move Down"><i class="fas fa-arrow-down"></i></a>
                 </td>
             </tr>
             @endforeach
