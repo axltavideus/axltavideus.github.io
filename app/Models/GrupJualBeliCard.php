@@ -16,5 +16,6 @@ class GrupJualBeliCard extends Model
         'description',
         'image_path',
         'link',
+        'order',
     ];
 }

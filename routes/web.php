@@ -57,9 +57,12 @@ Route::middleware([AuthenticateAdmin::class])->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'index'])->name('index');
         Route::get('/create', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'create'])->name('create');
         Route::post('/', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'store'])->name('store');
+        Route::post('/reorder', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'reorder'])->name('reorder');
         Route::get('/{grupJualBeliCard}/edit', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'edit'])->name('edit');
         Route::put('/{grupJualBeliCard}', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'update'])->name('update');
         Route::delete('/{grupJualBeliCard}', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'destroy'])->name('destroy');
+        Route::get('/{grupJualBeliCard}/move-up', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'moveUp'])->name('moveUp');
+        Route::get('/{grupJualBeliCard}/move-down', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'moveDown'])->name('moveDown');
     });
 
     // Admin routes for contact us cards management
@@ -67,6 +70,7 @@ Route::middleware([AuthenticateAdmin::class])->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\ContactUsCardController::class, 'index'])->name('index');
         Route::get('/create', [App\Http\Controllers\Admin\ContactUsCardController::class, 'create'])->name('create');
         Route::post('/', [App\Http\Controllers\Admin\ContactUsCardController::class, 'store'])->name('store');
+        Route::post('/reorder', [App\Http\Controllers\Admin\ContactUsCardController::class, 'reorder'])->name('reorder');
         Route::get('/{contactUsCard}/edit', [App\Http\Controllers\Admin\ContactUsCardController::class, 'edit'])->name('edit');
         Route::put('/{contactUsCard}', [App\Http\Controllers\Admin\ContactUsCardController::class, 'update'])->name('update');
         Route::delete('/{contactUsCard}', [App\Http\Controllers\Admin\ContactUsCardController::class, 'destroy'])->name('destroy');

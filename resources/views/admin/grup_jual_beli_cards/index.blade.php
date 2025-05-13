@@ -13,7 +13,7 @@
     @endif
 
     @if($cards->count())
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="sortable-table">
         <thead>
             <tr>
                 <th>Title</th>
@@ -23,9 +23,9 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="sortable-tbody">
             @foreach($cards as $card)
-            <tr>
+            <tr data-id="{{ $card->id }}">
                 <td>{{ $card->title }}</td>
                 <td>{{ Str::limit($card->description, 50) }}</td>
                 <td>
@@ -37,12 +37,14 @@
                 </td>
                 <td><a href="{{ $card->link }}" target="_blank">{{ $card->link }}</a></td>
                 <td>
-                    <a href="{{ route('admin.grup_jual_beli_cards.edit', $card) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit" style="color: white;"></a>
+                    <a href="{{ route('admin.grup_jual_beli_cards.edit', $card) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit" style="color: white;"></i></a>
                     <form action="{{ route('admin.grup_jual_beli_cards.destroy', $card) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this card?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
+                    <a href="{{ route('admin.grup_jual_beli_cards.moveUp', $card) }}" class="btn btn-sm btn-secondary" title="Move Up"><i class="fas fa-arrow-up"></i></a>
+                    <a href="{{ route('admin.grup_jual_beli_cards.moveDown', $card) }}" class="btn btn-sm btn-secondary" title="Move Down"><i class="fas fa-arrow-down"></i></a>
                 </td>
             </tr>
             @endforeach
@@ -53,3 +55,5 @@
     @endif
 </div>
 @endsection
+
+@include('admin.grup_jual_beli_cards.index-scripts')

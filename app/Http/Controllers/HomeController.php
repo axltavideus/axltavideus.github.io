@@ -19,7 +19,7 @@ class HomeController extends Controller
 
     public function contacts()
     {
-        $grupJualBeliCards = GrupJualBeliCard::all();
+        $grupJualBeliCards = GrupJualBeliCard::orderBy('order', 'asc')->get();
         $contactUsCards = \App\Models\ContactUsCard::orderBy('order', 'asc')->get();
         return view('contacts', compact('grupJualBeliCards', 'contactUsCards'));
     }
