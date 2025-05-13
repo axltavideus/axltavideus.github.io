@@ -70,6 +70,8 @@ Route::middleware([AuthenticateAdmin::class])->group(function () {
         Route::get('/{contactUsCard}/edit', [App\Http\Controllers\Admin\ContactUsCardController::class, 'edit'])->name('edit');
         Route::put('/{contactUsCard}', [App\Http\Controllers\Admin\ContactUsCardController::class, 'update'])->name('update');
         Route::delete('/{contactUsCard}', [App\Http\Controllers\Admin\ContactUsCardController::class, 'destroy'])->name('destroy');
+        Route::get('/{contactUsCard}/move-up', [App\Http\Controllers\Admin\ContactUsCardController::class, 'moveUp'])->name('moveUp');
+        Route::get('/{contactUsCard}/move-down', [App\Http\Controllers\Admin\ContactUsCardController::class, 'moveDown'])->name('moveDown');
     });
 });
 

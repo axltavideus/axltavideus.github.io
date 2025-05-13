@@ -14,5 +14,6 @@ class ContactUsCard extends Model
         'description',
         'image_path',
         'link',
+        'order',
     ];
 }
