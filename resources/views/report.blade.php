@@ -28,32 +28,31 @@
                 <form action="{{ route('dangerous.store') }}" method="POST" enctype="multipart/form-data" class="row g-4">
                     @csrf
                     <div class="col-md-6">
-                        <label for="ml_id" class="form-label fw-bold text-warning fs-5">ML ID <span
-                                class="text-danger">*</span></label>
+                        <label for="ml_id" class="form-label fw-bold text-warning fs-5">ML ID <span class="text-danger">*</span></label>
                         <input type="text" placeholder="Masukan ID Game" name="ml_id" id="ml_id" value="{{ old('ml_id') }}" required class="form-control form-control-lg" />
                     </div>
                     <div class="col-md-6">
-                        <label for="server_id" class="form-label fw-bold text-warning fs-5">Server ID</label>
-                        <input type="text" placeholder="Masukan ID Server" name="server_id" id="server_id" value="{{ old('server_id') }}" class="form-control form-control-lg" />
+                        <label for="server_id" class="form-label fw-bold text-warning fs-5">Server ID <span class="text-danger">*</span></label>
+                        <input type="text" placeholder="Masukan ID Server" name="server_id" id="server_id" value="{{ old('server_id') }}" required class="form-control form-control-lg" />
                     </div>
                     <div class="col-md-6">
-                        <label for="pelaku_nickname" class="form-label fw-bold text-warning fs-5">Pelaku Nickname</label>
-                        <input type="text" placeholder="Nick Pelaku" name="pelaku_nickname" id="pelaku_nickname" value="{{ old('pelaku_nickname') }}"
+                        <label for="pelaku_nickname" class="form-label fw-bold text-warning fs-5">Pelaku Nickname <span class="text-danger">*</span></label>
+                        <input type="text" placeholder="Nick Pelaku" name="pelaku_nickname" id="pelaku_nickname" required value="{{ old('pelaku_nickname') }}"
                             class="form-control form-control-lg" />
                     </div>
                     <div class="col-md-6">
-                        <label for="korban_nickname" class="form-label fw-bold text-warning fs-5">Korban Nickname</label>
-                        <input type="text" placeholder="Nick Korban" name="korban_nickname" id="korban_nickname" value="{{ old('korban_nickname') }}"
+                        <label for="korban_nickname" class="form-label fw-bold text-warning fs-5">Korban Nickname <span class="text-danger">*</span></label>
+                        <input type="text" placeholder="Nick Korban" name="korban_nickname" id="korban_nickname" required value="{{ old('korban_nickname') }}"
                             class="form-control form-control-lg" />
                     </div>
                     <div class="col-md-6">
                         <label for="tanggal_kejadian" class="form-label fw-bold text-warning fs-5">Tanggal Kejadian</label>
-                        <input type="date" name="tanggal_kejadian" id="tanggal_kejadian" value="{{ old('tanggal_kejadian') }}"
+                        <input type="date" name="tanggal_kejadian" id="tanggal_kejadian" required value="{{ old('tanggal_kejadian') }}" max="{{ date('Y-m-d') }}"
                             class="form-control form-control-lg" />
                     </div>
                     <div class="col-md-6">
                         <label for="bukti_kasus" class="form-label fw-bold text-warning fs-5">Bukti Kasus (jpg, jpeg, png max
-                            2MB)</label>
+                            4MB)</label>
                         <input type="file" name="bukti_kasus[]" id="bukti_kasus" accept=".jpg,.jpeg,.png" class="form-control form-control-lg"
                             multiple />
                     </div>

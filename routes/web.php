@@ -16,6 +16,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/kasus', [App\Http\Controllers\DangerousAccountController::class, 'index'])->name('dangerous.index');
 Route::get('/kasus/{id}', [App\Http\Controllers\DangerousAccountController::class, 'show'])->name('dangerous.show');
 
+Route::post('/admin/dangerous_accounts/{id}/accept', [App\Http\Controllers\DangerousAccountController::class, 'adminAccept'])->name('admin.dangerous_accounts.accept');
+
 Route::get('/contacts', [App\Http\Controllers\HomeController::class, 'contacts'])->name('contacts');
 
 // Admin login routes
@@ -24,8 +26,8 @@ Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.logi
 Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 // Admin register routes
-Route::get('/admin/register', [LoginController::class, 'showRegisterForm'])->name('admin.register');
-Route::post('/admin/register', [LoginController::class, 'register'])->name('admin.register.submit');
+Route::get('/admin/637d4f870d9f555f14ecb49ae5a5a01d', [LoginController::class, 'showRegisterForm'])->name('admin.register');
+Route::post('/admin/637d4f870d9f555f14ecb49ae5a5a01d', [LoginController::class, 'register'])->name('admin.register.submit');
 
 // Admin dashboard route protected by middleware
 Route::middleware([AuthenticateAdmin::class])->group(function () {
@@ -58,6 +60,18 @@ Route::middleware([AuthenticateAdmin::class])->group(function () {
         Route::get('/{grupJualBeliCard}/edit', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'edit'])->name('edit');
         Route::put('/{grupJualBeliCard}', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'update'])->name('update');
         Route::delete('/{grupJualBeliCard}', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'destroy'])->name('destroy');
+    });
+
+    // Admin routes for contact us cards management
+    Route::prefix('admin/contact-us-cards')->name('admin.contact_us_cards.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Admin\ContactUsCardController::class, 'index'])->name('index');
+        Route::get('/create', [App\Http\Controllers\Admin\ContactUsCardController::class, 'create'])->name('create');
+        Route::post('/', [App\Http\Controllers\Admin\ContactUsCardController::class, 'store'])->name('store');
+        Route::get('/{contactUsCard}/edit', [App\Http\Controllers\Admin\ContactUsCardController::class, 'edit'])->name('edit');
+        Route::put('/{contactUsCard}', [App\Http\Controllers\Admin\ContactUsCardController::class, 'update'])->name('update');
+        Route::delete('/{contactUsCard}', [App\Http\Controllers\Admin\ContactUsCardController::class, 'destroy'])->name('destroy');
+        Route::get('/{contactUsCard}/move-up', [App\Http\Controllers\Admin\ContactUsCardController::class, 'moveUp'])->name('moveUp');
+        Route::get('/{contactUsCard}/move-down', [App\Http\Controllers\Admin\ContactUsCardController::class, 'moveDown'])->name('moveDown');
     });
 });
 

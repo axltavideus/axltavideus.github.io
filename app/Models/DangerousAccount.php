@@ -15,6 +15,7 @@ class DangerousAccount extends Model
         'bukti_file_path',
         'header_picture_path',
         'kronologi',
+        'is_accepted',
     ];
 
     protected $casts = [

@@ -16,10 +16,11 @@ class DangerousAccountController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'ml_id' => 'required',
+$request->validate([
+            'ml_id' => 'required|unique:dangerous_accounts,ml_id',
+            'tanggal_kejadian' => 'nullable|date|before_or_equal:today',
             'bukti_kasus' => 'nullable|array',
-            'bukti_kasus.*' => 'file|mimes:jpg,jpeg,png|max:2048',
+            'bukti_kasus.*' => 'file|mimes:jpg,jpeg,png|max:4096',
         ]);
 
         try {
@@ -41,6 +42,7 @@ class DangerousAccountController extends Controller
                 'tanggal_kejadian' => $request->tanggal_kejadian,
                 'bukti_file_path' => json_encode($buktiPaths),
                 'kronologi' => $request->kronologi,
+                'is_accepted' => false,
             ]);
         } catch (\Exception $e) {
             Log::error('Error uploading files: ' . $e->getMessage());
@@ -101,6 +103,9 @@ class DangerousAccountController extends Controller
                     ->orWhere('korban_nickname', 'like', '%' . $search . '%');
             });
         }
+
+        // Filter only accepted reports
+        $query->where('is_accepted', true);
 
         $dangerousAccounts = $query->orderBy($sortBy, $sortOrder)->get();
 
@@ -256,5 +261,14 @@ class DangerousAccountController extends Controller
         } catch (ModelNotFoundException $e) {
             return redirect()->route('dangerous.index')->with('error', 'ML ID not found.');
         }
+    }
+
+    public function adminAccept($id)
+    {
+        $dangerousAccount = DangerousAccount::findOrFail($id);
+        $dangerousAccount->is_accepted = true;
+        $dangerousAccount->save();
+
+        return redirect()->route('admin.dangerous_accounts.index')->with('success', 'Report accepted successfully!');
     }
 }

@@ -81,6 +81,15 @@
                                     class="btn btn-warning btn-sm mb-1">
                                     <i class="fas fa-edit" style="color: white;"></i> <!-- Edit Icon -->
                                 </a>
+                                @if(!$account->is_accepted)
+                                    <form action="{{ route('admin.dangerous_accounts.accept', $account->id) }}" method="POST"
+                                        style="display:inline-block;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-success btn-sm mb-1" title="Accept Report">
+                                            <i class="fas fa-check"></i> Accept
+                                        </button>
+                                    </form>
+                                @endif
                                 <form action="{{ route('admin.dangerous_accounts.destroy', $account->id) }}" method="POST"
                                     style="display:inline-block;"
                                     onsubmit="return confirm('Are you sure you want to delete this dangerous account?');">
