@@ -35,15 +35,36 @@ class ContactUsCardController extends Controller
             $imagePath = $request->file('image')->store('contact_us_images', 'public');
         }
 
+        // Automatically assign order to last if not provided
+        $order = $request->order;
+        if ($order === null) {
+            $maxOrder = ContactUsCard::max('order');
+            $order = $maxOrder !== null ? $maxOrder + 1 : 0;
+        }
+
         ContactUsCard::create([
             'title' => $request->title,
             'description' => $request->description,
             'image_path' => $imagePath,
             'link' => $request->link,
-            'order' => $request->order ?? 0,
+            'order' => $order,
         ]);
 
         return redirect()->route('admin.contact_us_cards.index')->with('success', 'Card created successfully.');
+    }
+
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'order' => 'required|array',
+            'order.*' => 'integer|exists:contact_us_cards,id',
+        ]);
+
+        foreach ($request->order as $index => $id) {
+            ContactUsCard::where('id', $id)->update(['order' => $index]);
+        }
+
+        return response()->json(['message' => 'Order updated successfully']);
     }
 
     public function edit(ContactUsCard $contactUsCard)

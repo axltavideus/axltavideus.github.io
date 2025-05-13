@@ -13,7 +13,7 @@
     @endif
 
     @if($cards->count())
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="sortable-table">
         <thead>
             <tr>
                 <th>Title</th>
@@ -23,9 +23,9 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="sortable-tbody">
             @foreach($cards as $card)
-            <tr>
+            <tr data-id="{{ $card->id }}">
                 <td>{{ $card->title }}</td>
                 <td>{{ Str::limit($card->description, 50) }}</td>
                 <td>
@@ -55,3 +55,5 @@
     @endif
 </div>
 @endsection
+
+@include('admin.contact_us_cards.index-scripts')

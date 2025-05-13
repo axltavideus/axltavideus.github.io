@@ -11,7 +11,7 @@ class GrupJualBeliCardController extends Controller
 {
     public function index()
     {
-        $cards = GrupJualBeliCard::all();
+        $cards = GrupJualBeliCard::orderBy('order', 'asc')->get();
         return view('admin.grup_jual_beli_cards.index', compact('cards'));
     }
 
@@ -27,6 +27,7 @@ class GrupJualBeliCardController extends Controller
             'description' => 'required|string',
             'image' => 'nullable|image|max:2048',
             'link' => 'nullable|url',
+            'order' => 'nullable|integer',
         ]);
 
         $imagePath = null;
@@ -34,14 +35,36 @@ class GrupJualBeliCardController extends Controller
             $imagePath = $request->file('image')->store('grup_jual_beli_images', 'public');
         }
 
+        // Automatically assign order to last if not provided
+        $order = $request->order;
+        if ($order === null) {
+            $maxOrder = GrupJualBeliCard::max('order');
+            $order = $maxOrder !== null ? $maxOrder + 1 : 0;
+        }
+
         GrupJualBeliCard::create([
             'title' => $request->title,
             'description' => $request->description,
             'image_path' => $imagePath,
             'link' => $request->link,
+            'order' => $order,
         ]);
 
         return redirect()->route('admin.grup_jual_beli_cards.index')->with('success', 'Card created successfully.');
+    }
+
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'order' => 'required|array',
+            'order.*' => 'integer|exists:grup_jual_beli_cards,id',
+        ]);
+
+        foreach ($request->order as $index => $id) {
+            GrupJualBeliCard::where('id', $id)->update(['order' => $index]);
+        }
+
+        return response()->json(['message' => 'Order updated successfully']);
     }
 
     public function edit(GrupJualBeliCard $grupJualBeliCard)
@@ -56,6 +79,7 @@ class GrupJualBeliCardController extends Controller
             'description' => 'required|string',
             'image' => 'nullable|image|max:2048',
             'link' => 'nullable|url',
+            'order' => 'nullable|integer',
         ]);
 
         if ($request->hasFile('image')) {
@@ -69,6 +93,7 @@ class GrupJualBeliCardController extends Controller
         $grupJualBeliCard->title = $request->title;
         $grupJualBeliCard->description = $request->description;
         $grupJualBeliCard->link = $request->link;
+        $grupJualBeliCard->order = $request->order ?? 0;
         $grupJualBeliCard->save();
 
         return redirect()->route('admin.grup_jual_beli_cards.index')->with('success', 'Card updated successfully.');
@@ -82,5 +107,41 @@ class GrupJualBeliCardController extends Controller
         $grupJualBeliCard->delete();
 
         return redirect()->route('admin.grup_jual_beli_cards.index')->with('success', 'Card deleted successfully.');
+    }
+
+    public function moveUp(GrupJualBeliCard $grupJualBeliCard)
+    {
+        $previousCard = GrupJualBeliCard::where('order', '<', $grupJualBeliCard->order)
+            ->orderBy('order', 'desc')
+            ->first();
+
+        if ($previousCard) {
+            $tempOrder = $grupJualBeliCard->order;
+            $grupJualBeliCard->order = $previousCard->order;
+            $previousCard->order = $tempOrder;
+
+            $grupJualBeliCard->save();
+            $previousCard->save();
+        }
+
+        return redirect()->route('admin.grup_jual_beli_cards.index')->with('success', 'Card moved up successfully.');
+    }
+
+    public function moveDown(GrupJualBeliCard $grupJualBeliCard)
+    {
+        $nextCard = GrupJualBeliCard::where('order', '>', $grupJualBeliCard->order)
+            ->orderBy('order', 'asc')
+            ->first();
+
+        if ($nextCard) {
+            $tempOrder = $grupJualBeliCard->order;
+            $grupJualBeliCard->order = $nextCard->order;
+            $nextCard->order = $tempOrder;
+
+            $grupJualBeliCard->save();
+            $nextCard->save();
+        }
+
+        return redirect()->route('admin.grup_jual_beli_cards.index')->with('success', 'Card moved down successfully.');
     }
 }
