@@ -89,3 +89,6 @@ Route::match(['get', 'post'], '/dangerous-phone-numbers/search', [App\Http\Contr
 Route::get('/rekber', function () {
     return view('rekber');
 })->name('rekber');
+Route::view('/peraturan-rekber', 'peraturan')->name('peraturan');
+
+Route::view('/cara-rekber', 'cara')->name('cara');
