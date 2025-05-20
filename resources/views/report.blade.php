@@ -42,13 +42,13 @@
                 <div class="col-md-6">
                     <label for="pelaku_nickname" class="form-label fw-bold text-warning fs-5">Kontak Pelaku <span
                             class="text-danger">*</span></label>
-                    <input type="text" placeholder="Nick Pelaku" name="pelaku_nickname" id="pelaku_nickname" required
+                    <input type="text" placeholder="Kontak Pelaku" name="pelaku_nickname" id="pelaku_nickname" required
                         value="{{ old('pelaku_nickname') }}" class="form-control form-control-lg" />
                 </div>
                 <div class="col-md-6">
                     <label for="korban_nickname" class="form-label fw-bold text-warning fs-5">Kontak Korban <span
                             class="text-danger">*</span></label>
-                    <input type="text" placeholder="Nick Korban" name="korban_nickname" id="korban_nickname" required
+                    <input type="text" placeholder="Kontak Korban" name="korban_nickname" id="korban_nickname" required
                         value="{{ old('korban_nickname') }}" class="form-control form-control-lg" />
                 </div>
                 <div class="col-md-6">
