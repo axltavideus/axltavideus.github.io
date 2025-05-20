@@ -10,28 +10,34 @@
             <a href="{{ route('admin.dangerous_accounts.create') }}" class="btn btn-warning mb-3">Add New Dangerous
                 Account</a>
 
-            <form method="GET" action="{{ route('admin.dangerous_accounts.index') }}"
-                class="d-flex align-items-center gap-2 mb-3">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search..."
-                    class="form-control" style="width: 200px;">
-                <label for="sort_by" class="fw-semibold text-warning">Sort By:</label>
-                <select name="sort_by" id="sort_by" class="form-select" style="width: auto;">
-                    <option value="tanggal_kejadian" {{ $sortBy == 'tanggal_kejadian' ? 'selected' : '' }}>Tanggal Kejadian
-                    </option>
-                    <option value="ml_id" {{ $sortBy == 'ml_id' ? 'selected' : '' }}>ML ID</option>
-                    <option value="server_id" {{ $sortBy == 'server_id' ? 'selected' : '' }}>Server ID</option>
-                    <option value="pelaku_nickname" {{ $sortBy == 'pelaku_nickname' ? 'selected' : '' }}>Pelaku Nickname
-                    </option>
-                    <option value="korban_nickname" {{ $sortBy == 'korban_nickname' ? 'selected' : '' }}>Korban Nickname
-                    </option>
-                </select>
-
-                <select name="sort_order" id="sort_order" class="form-select" style="width: auto;">
-                    <option value="asc" {{ $sortOrder == 'asc' ? 'selected' : '' }}>Ascending</option>
-                    <option value="desc" {{ $sortOrder == 'desc' ? 'selected' : '' }}>Descending</option>
-                </select>
-
-                <button type="submit" class="btn btn-warning text-black fw-semibold px-4 py-2">Sort</button>
+            <form method="GET" action="{{ route('admin.dangerous_accounts.index') }}" class="row g-2 mb-3">
+                <div class="col-12 col-md-4">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search..."
+                        class="form-control w-100" autocomplete="off">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label for="sort_by" class="fw-semibold text-warning d-block mb-1">Sort By:</label>
+                    <select name="sort_by" id="sort_by" class="form-select w-100">
+                        <option value="tanggal_kejadian" {{ $sortBy == 'tanggal_kejadian' ? 'selected' : '' }}>Tanggal
+                            Kejadian</option>
+                        <option value="ml_id" {{ $sortBy == 'ml_id' ? 'selected' : '' }}>ML ID</option>
+                        <option value="server_id" {{ $sortBy == 'server_id' ? 'selected' : '' }}>Server ID</option>
+                        <option value="pelaku_nickname" {{ $sortBy == 'pelaku_nickname' ? 'selected' : '' }}>Pelaku Nickname
+                        </option>
+                        <option value="korban_nickname" {{ $sortBy == 'korban_nickname' ? 'selected' : '' }}>Korban Nickname
+                        </option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-3">
+                    <label for="sort_order" class="d-block mb-1">&nbsp;</label>
+                    <select name="sort_order" id="sort_order" class="form-select w-100">
+                        <option value="asc" {{ $sortOrder == 'asc' ? 'selected' : '' }}>Ascending</option>
+                        <option value="desc" {{ $sortOrder == 'desc' ? 'selected' : '' }}>Descending</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-2 d-grid">
+                    <button type="submit" class="btn btn-warning text-black fw-semibold w-100">Sort</button>
+                </div>
             </form>
         </div>
 
@@ -42,74 +48,115 @@
         @if($dangerousAccounts->isEmpty())
             <p>No dangerous accounts found.</p>
         @else
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ML ID</th>
-                        <th>Server ID</th>
-                        <th>Pelaku Nickname</th>
-                        <th>Korban Nickname</th>
-                        <th>Tanggal Kejadian</th>
-                        <!-- <th>Bukti Kasus</th> -->
-                        <th>Created At</th>
-                        <th>Updated At</th>
-                        <th>Kronologi</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($dangerousAccounts as $account)
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
                         <tr>
-                            <td>{{ $account->ml_id }}</td>
-                            <td>{{ $account->server_id }}</td>
-                            <td>{{ $account->pelaku_nickname }}</td>
-                            <td>{{ $account->korban_nickname }}</td>
-                            <td>{{ \Carbon\Carbon::parse($account->tanggal_kejadian)->format('d-m-Y') }}</td>
-                            <!-- <td>
-                                                                    @if($account->bukti_file_path)
-                                                                        <a href="{{ asset('storage/' . $account->bukti_file_path) }}" target="_blank"
-                                                                            class="text-warning">View Evidence</a>
-                                                                    @else
-                                                                        None
-                                                                    @endif
-                                                                </td> -->
-                            <td>{{ \Carbon\Carbon::parse($account->created_at)->format('d-m-Y') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($account->updated_at)->format('d-m-Y') }}</td>
-                            <td>{{ $account->kronologi }}</td>
-                            <td>
-                                <a href="{{ route('admin.dangerous_accounts.edit', $account->id) }}"
-                                    class="btn btn-warning btn-sm mb-1">
-                                    <i class="fas fa-edit" style="color: white;"></i> <!-- Edit Icon -->
-                                </a>
-                                @if(!$account->is_accepted)
-                                    <form action="{{ route('admin.dangerous_accounts.accept', $account->id) }}" method="POST"
-                                        style="display:inline-block;">
+                            <th>ML ID</th>
+                            <th>Server ID</th>
+                            <th>Pelaku Nickname</th>
+                            <th>Korban Nickname</th>
+                            <th>Tanggal Kejadian</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th>Kronologi</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($dangerousAccounts as $account)
+                            <tr>
+                                <td data-label="ML ID">{{ $account->ml_id }}</td>
+                                <td data-label="Server ID">{{ $account->server_id }}</td>
+                                <td data-label="Pelaku Nickname">{{ $account->pelaku_nickname }}</td>
+                                <td data-label="Korban Nickname">{{ $account->korban_nickname }}</td>
+                                <td data-label="Tanggal Kejadian">
+                                    {{ \Carbon\Carbon::parse($account->tanggal_kejadian)->format('d-m-Y') }}
+                                </td>
+                                <td data-label="Created At">{{ \Carbon\Carbon::parse($account->created_at)->format('d-m-Y') }}</td>
+                                <td data-label="Updated At">{{ \Carbon\Carbon::parse($account->updated_at)->format('d-m-Y') }}</td>
+                                <td data-label="Kronologi">{{ $account->kronologi }}</td>
+                                <td data-label="Actions" class="text-center">
+                                    <a href="{{ route('admin.dangerous_accounts.edit', $account->id) }}"
+                                        class="btn btn-warning btn-sm mb-1" title="Edit">
+                                        <i class="fas fa-edit text-white"></i>
+                                    </a>
+                                    @if(!$account->is_accepted)
+                                        <form action="{{ route('admin.dangerous_accounts.accept', $account->id) }}" method="POST"
+                                            class="d-inline-block mb-1">
+                                            @csrf
+                                            <button type="submit" class="btn btn-success btn-sm" title="Accept Report">
+                                                <i class="fas fa-check"></i> Accept
+                                            </button>
+                                        </form>
+                                    @endif
+                                    <form action="{{ route('admin.dangerous_accounts.destroy', $account->id) }}" method="POST"
+                                        class="d-inline-block mb-1"
+                                        onsubmit="return confirm('Are you sure you want to delete this dangerous account?');">
                                         @csrf
-                                        <button type="submit" class="btn btn-success btn-sm mb-1" title="Accept Report">
-                                            <i class="fas fa-check"></i> Accept
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Delete">
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
-                                @endif
-                                <form action="{{ route('admin.dangerous_accounts.destroy', $account->id) }}" method="POST"
-                                    style="display:inline-block;"
-                                    onsubmit="return confirm('Are you sure you want to delete this dangerous account?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm mb-1">
-                                        <i class="fas fa-trash"></i> <!-- Delete Icon -->
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         @endif
     </div>
 @endsection
 
 <style>
+    /* Additional custom styles */
     .container {
         margin-top: 20px;
+    }
+
+    /* Make table cells stack on very small screens for better mobile view */
+    @media (max-width: 575.98px) {
+        table.table thead {
+            display: none;
+        }
+
+        table.table tbody tr {
+            display: block;
+            margin-bottom: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            padding: 0.75rem;
+        }
+
+        table.table tbody tr td {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.375rem 0.75rem;
+            border: none;
+            border-bottom: 1px solid #dee2e6;
+            position: relative;
+        }
+
+        table.table tbody tr td:last-child {
+            border-bottom: 0;
+        }
+
+        table.table tbody tr td::before {
+            content: attr(data-label);
+            font-weight: 600;
+            text-transform: uppercase;
+            flex: 1 1 50%;
+        }
+
+        table.table tbody tr td:last-child {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        table.table tbody tr td:last-child form,
+        table.table tbody tr td:last-child a {
+            margin: 0 0.15rem 0.3rem 0.15rem;
+        }
     }
 </style>
