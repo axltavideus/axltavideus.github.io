@@ -35,11 +35,11 @@
                             <input type="text" id="server_id" readonly value="{{ $account->server_id }}">
                         </div>
                         <div class="form-row">
-                            <label for="pelaku_nickname">Pelaku Nickname</label>
+                            <label for="pelaku_nickname">Kontak Pelaku</label>
                             <input type="text" id="pelaku_nickname" readonly value="{{ $account->pelaku_nickname }}">
                         </div>
                         <div class="form-row">
-                            <label for="korban_nickname">Korban Nickname</label>
+                            <label for="korban_nickname">Kontak Korban</label>
                             <input type="text" id="korban_nickname" readonly value="{{ $account->korban_nickname }}">
                         </div>
                         <div class="form-row">
