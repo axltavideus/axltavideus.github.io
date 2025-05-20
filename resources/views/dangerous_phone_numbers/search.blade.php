@@ -40,12 +40,14 @@
                     </tbody>
                 </table>
             </div>
-        @elseif($notFound)
-            <div class="alert alert-danger">
-                Nomor telepon tidak ditemukan untuk input yang dimasukkan.
-            </div>
         @endif
     @endisset
+
+    @if(isset($notFound) && $notFound)
+        <div class="alert alert-danger">
+            Nomor telepon tidak ditemukan untuk input yang dimasukkan.
+        </div>
+    @endif
 </div>
 @endsection
 <style>
