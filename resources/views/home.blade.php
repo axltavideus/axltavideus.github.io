@@ -112,7 +112,9 @@
 
         .hero-section .content h1 span {
             color: var(--text-color);
-            font-family: 'Erica One', cursive;
+            font-family: "Archivo Black", sans-serif;
+            /* font-style: italic; */
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) ;
         }
 
         .hero-section .content p {
