@@ -6,8 +6,8 @@
         <div class="content">
             <h1>Cek dan Lapor!<br><span>Cek Keamanan akun kamu secara gratis!</span></h1>
             <p>Web wenstein store tempat kamu cek keamanan akun mu,<br> dan cek keamanan akun yang mau kamu beli </p>
-            <div class="center-btn"> <button class="btn-hero"><span><i class="fas fa-search"></i></span> Cek ID
-                    Akun</button> <button class="btn-secondary">Lapor</button> </div>
+            <div class="center-btn"> <a href="{{ url('/kasus') }}"><button class="btn-hero"><span><i class="fas fa-search"></i></span> Cek ID
+                    Akun</button></a> <a href="{{ url('/report') }}"><button class="btn-secondary">Lapor</button></a> </div>
         </div>
     </section>
 
@@ -112,7 +112,9 @@
 
         .hero-section .content h1 span {
             color: var(--text-color);
-            font-family: 'Erica One', cursive;
+            font-family: "Archivo Black", sans-serif;
+            /* font-style: italic; */
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) ;
         }
 
         .hero-section .content p {
