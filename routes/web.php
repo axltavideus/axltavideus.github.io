@@ -57,9 +57,12 @@ Route::middleware([AuthenticateAdmin::class])->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'index'])->name('index');
         Route::get('/create', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'create'])->name('create');
         Route::post('/', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'store'])->name('store');
+        Route::post('/reorder', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'reorder'])->name('reorder');
         Route::get('/{grupJualBeliCard}/edit', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'edit'])->name('edit');
         Route::put('/{grupJualBeliCard}', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'update'])->name('update');
         Route::delete('/{grupJualBeliCard}', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'destroy'])->name('destroy');
+        Route::get('/{grupJualBeliCard}/move-up', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'moveUp'])->name('moveUp');
+        Route::get('/{grupJualBeliCard}/move-down', [App\Http\Controllers\Admin\GrupJualBeliCardController::class, 'moveDown'])->name('moveDown');
     });
 
     // Admin routes for contact us cards management
@@ -67,9 +70,12 @@ Route::middleware([AuthenticateAdmin::class])->group(function () {
         Route::get('/', [App\Http\Controllers\Admin\ContactUsCardController::class, 'index'])->name('index');
         Route::get('/create', [App\Http\Controllers\Admin\ContactUsCardController::class, 'create'])->name('create');
         Route::post('/', [App\Http\Controllers\Admin\ContactUsCardController::class, 'store'])->name('store');
+        Route::post('/reorder', [App\Http\Controllers\Admin\ContactUsCardController::class, 'reorder'])->name('reorder');
         Route::get('/{contactUsCard}/edit', [App\Http\Controllers\Admin\ContactUsCardController::class, 'edit'])->name('edit');
         Route::put('/{contactUsCard}', [App\Http\Controllers\Admin\ContactUsCardController::class, 'update'])->name('update');
         Route::delete('/{contactUsCard}', [App\Http\Controllers\Admin\ContactUsCardController::class, 'destroy'])->name('destroy');
+        Route::get('/{contactUsCard}/move-up', [App\Http\Controllers\Admin\ContactUsCardController::class, 'moveUp'])->name('moveUp');
+        Route::get('/{contactUsCard}/move-down', [App\Http\Controllers\Admin\ContactUsCardController::class, 'moveDown'])->name('moveDown');
     });
 });
 
@@ -79,3 +85,10 @@ use Illuminate\Http\Request;
 Route::post('/search-ml-id', [App\Http\Controllers\HomeController::class, 'searchMlId'])->name('search.ml_id');
 
 Route::match(['get', 'post'], '/dangerous-phone-numbers/search', [App\Http\Controllers\DangerousPhoneNumberController::class, 'userSearch'])->name('dangerous_phone_numbers.search');
+
+Route::get('/rekber', function () {
+    return view('rekber');
+})->name('rekber');
+Route::view('/peraturan-rekber', 'peraturan')->name('peraturan');
+
+Route::view('/cara-rekber', 'cara')->name('cara');

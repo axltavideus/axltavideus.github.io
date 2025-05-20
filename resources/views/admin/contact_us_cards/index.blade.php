@@ -13,7 +13,7 @@
     @endif
 
     @if($cards->count())
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="sortable-table">
         <thead>
             <tr>
                 <th>Title</th>
@@ -23,9 +23,9 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="sortable-tbody">
             @foreach($cards as $card)
-            <tr>
+            <tr data-id="{{ $card->id }}">
                 <td>{{ $card->title }}</td>
                 <td>{{ Str::limit($card->description, 50) }}</td>
                 <td>
@@ -43,6 +43,8 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                     </form>
+                    <a href="{{ route('admin.contact_us_cards.moveUp', $card) }}" class="btn btn-sm btn-secondary" title="Move Up"><i class="fas fa-arrow-up"></i></a>
+                    <a href="{{ route('admin.contact_us_cards.moveDown', $card) }}" class="btn btn-sm btn-secondary" title="Move Down"><i class="fas fa-arrow-down"></i></a>
                 </td>
             </tr>
             @endforeach
@@ -53,3 +55,5 @@
     @endif
 </div>
 @endsection
+
+@include('admin.contact_us_cards.index-scripts')
