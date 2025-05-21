@@ -11,8 +11,8 @@ class ContactUsCardController extends Controller
 {
     public function index()
     {
-        $cards = ContactUsCard::orderBy('order', 'asc')->get();
-        return view('admin.contact_us_cards.index', compact('cards'));
+$cards = ContactUsCard::orderBy('order', 'asc')->paginate(10);
+return view('admin.contact_us_cards.index', compact('cards'));
     }
 
     public function create()

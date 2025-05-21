@@ -18,19 +18,20 @@ class DangerousPhoneNumberController extends Controller
                   ->orWhere('keterangan', 'like', '%' . $search . '%');
         }
 
-        $dangerousPhoneNumbers = $query->orderBy('created_at', 'desc')->get();
+    $dangerousPhoneNumbers = $query->orderBy('created_at', 'desc')->paginate(10);
 
-        return view('admin.dangerous_phone_numbers.index', [
-            'dangerousPhoneNumbers' => $dangerousPhoneNumbers,
-            'search' => $search,
-        ]);
+    return view('admin.dangerous_phone_numbers.index', [
+        'dangerousPhoneNumbers' => $dangerousPhoneNumbers,
+        'search' => $search,
+    ]);
+
     }
 
     public function userSearch(Request $request)
     {
         if ($request->isMethod('post')) {
             $request->validate([
-                'search' => 'required|string',
+                'search' => 'nullable|string',
             ]);
 
             $search = $request->input('search');

@@ -65,14 +65,6 @@
                             <td>{{ $account->pelaku_nickname }}</td>
                             <td>{{ $account->korban_nickname }}</td>
                             <td>{{ \Carbon\Carbon::parse($account->tanggal_kejadian)->format('d-m-Y') }}</td>
-                            <!-- <td>
-                                                                    @if($account->bukti_file_path)
-                                                                        <a href="{{ asset('storage/' . $account->bukti_file_path) }}" target="_blank"
-                                                                            class="text-warning">View Evidence</a>
-                                                                    @else
-                                                                        None
-                                                                    @endif
-                                                                </td> -->
                             <td>{{ \Carbon\Carbon::parse($account->created_at)->format('d-m-Y') }}</td>
                             <td>{{ \Carbon\Carbon::parse($account->updated_at)->format('d-m-Y') }}</td>
                             <td>{{ $account->kronologi }}</td>
@@ -104,6 +96,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{ $dangerousAccounts->appends(request()->query())->links('pagination::bootstrap-5') }}
         @endif
     </div>
 @endsection

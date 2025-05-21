@@ -18,6 +18,7 @@
             min-height: 100vh;
             color: white;
             padding-top: 1rem;
+            transition: transform 0.3s ease;
         }
         .sidebar a {
             color: white;
@@ -34,28 +35,97 @@
             padding: 1rem 2rem;
             background-color: #f8f9fa;
             min-height: 100vh;
+            transition: margin-left 0.3s ease;
+        }
+        /* Burger icon styles */
+        .burger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #ffc107;
+            background: none;
+            border: none;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                transform: translateX(-100%);
+                z-index: 1000;
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .content {
+                padding: 1rem;
+                margin-left: 0;
+            }
+            .burger {
+                display: block;
+            }
+            body.sidebar-open {
+                overflow: hidden;
+            }
+        }
+        .close-sidebar {
+            display: none;
+            position: absolute;
+            top: 5px;
+            right: 15px;
+            font-size: 2rem;
+            color: #ffc107;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1100;
+        }
+        @media (max-width: 768px) {
+            .close-sidebar {
+                display: block;
+            }
         }
     </style>
 </head>
-<body>
-    <div class="sidebar">
-        <h4 class="text-center mb-4">Admin Panel</h4>
-        <a href="{{ route('admin.dangerous_accounts.index') }}" class="{{ request()->routeIs('admin.dangerous_accounts.*') ? 'active' : '' }}">Dangerous Accounts</a>
-        <a href="{{ route('admin.dangerous_phone_numbers.index') }}" class="{{ request()->routeIs('admin.dangerous_phone_numbers.*') ? 'active' : '' }}">Dangerous Phone Numbers</a>
-        <a href="{{ route('admin.grup_jual_beli_cards.index') }}" class="{{ request()->routeIs('admin.grup_jual_beli_cards.*') ? 'active' : '' }}">Grup Jual Beli Cards</a>
-        <a href="{{ route('admin.contact_us_cards.index') }}" class="{{ request()->routeIs('admin.contact-us-cards.*') ? 'active' : '' }}">Contact Us Cards</a>
-        <form method="POST" action="{{ route('admin.logout') }}" class="mt-4 px-3">
-            @csrf
-            <button type="submit" class="btn btn-warning w-100">Logout</button>
-        </form>
-    </div>
-    <div class="content">
-        <nav class="navbar navbar-expand navbar-custom mb-4">
-            <div class="container-fluid">
-                <span class="navbar-brand text-warning fw-bold">@yield('title', 'Admin Panel')</span>
-            </div>
-        </nav>
-        @yield('content')
-    </div>
-</body>
+    <body>
+        <div class="sidebar" id="sidebar">
+            <button class="close-sidebar" id="closeSidebar" aria-label="Close sidebar">&times;</button>
+            <h4 class="text-center mb-4">Admin Panel</h4>
+            <a href="{{ route('admin.dangerous_accounts.index') }}" class="{{ request()->routeIs('admin.dangerous_accounts.*') ? 'active' : '' }}">Dangerous Accounts</a>
+            <a href="{{ route('admin.dangerous_phone_numbers.index') }}" class="{{ request()->routeIs('admin.dangerous_phone_numbers.*') ? 'active' : '' }}">Dangerous Phone Numbers</a>
+            <a href="{{ route('admin.grup_jual_beli_cards.index') }}" class="{{ request()->routeIs('admin.grup_jual_beli_cards.*') ? 'active' : '' }}">Grup Jual Beli Cards</a>
+            <a href="{{ route('admin.contact_us_cards.index') }}" class="{{ request()->routeIs('admin.contact-us-cards.*') ? 'active' : '' }}">Contact Us Cards</a>
+            <form method="POST" action="{{ route('admin.logout') }}" class="mt-4 px-3">
+                @csrf
+                <button type="submit" class="btn btn-warning w-100">Logout</button>
+            </form>
+        </div>
+        <div class="content">
+            <nav class="navbar navbar-expand navbar-custom mb-4">
+                <div class="container-fluid d-flex align-items-center">
+                    <button class="burger" id="burger" aria-label="Toggle sidebar">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <span class="navbar-brand text-warning fw-bold ms-3">@yield('title', 'Admin Panel')</span>
+                </div>
+            </nav>
+            @yield('content')
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const burger = document.getElementById('burger');
+                const sidebar = document.getElementById('sidebar');
+                const closeSidebar = document.getElementById('closeSidebar');
+                burger.addEventListener('click', function () {
+                    sidebar.classList.toggle('active');
+                    document.body.classList.toggle('sidebar-open');
+                });
+                closeSidebar.addEventListener('click', function () {
+                    sidebar.classList.remove('active');
+                    document.body.classList.remove('sidebar-open');
+                });
+            });
+        </script>
+    </body>
 </html>
