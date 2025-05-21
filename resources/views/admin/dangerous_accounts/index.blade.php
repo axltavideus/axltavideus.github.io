@@ -50,32 +50,31 @@
                         <th>Pelaku Nickname</th>
                         <th>Korban Nickname</th>
                         <th>Tanggal Kejadian</th>
-                        <!-- <th>Bukti Kasus</th> -->
                         <th>Created At</th>
                         <th>Updated At</th>
                         <th>Kronologi</th>
-                        <th>Actions</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($dangerousAccounts as $account)
                         <tr>
-                            <td>{{ $account->ml_id }}</td>
-                            <td>{{ $account->server_id }}</td>
-                            <td>{{ $account->pelaku_nickname }}</td>
-                            <td>{{ $account->korban_nickname }}</td>
-                            <td>{{ \Carbon\Carbon::parse($account->tanggal_kejadian)->format('d-m-Y') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($account->created_at)->format('d-m-Y') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($account->updated_at)->format('d-m-Y') }}</td>
-                            <td>{{ $account->kronologi }}</td>
-                            <td>
+                            <td data-label="ML ID">{{ $account->ml_id }}</td>
+                            <td data-label="Server ID">{{ $account->server_id }}</td>
+                            <td data-label="Pelaku Nickname">{{ $account->pelaku_nickname }}</td>
+                            <td data-label="Korban Nickname">{{ $account->korban_nickname }}</td>
+                            <td data-label="Tanggal Kejadian">{{ \Carbon\Carbon::parse($account->tanggal_kejadian)->format('d-m-Y') }}</td>
+                            <td data-label="Created At">{{ \Carbon\Carbon::parse($account->created_at)->format('d-m-Y') }}</td>
+                            <td data-label="Updated At">{{ \Carbon\Carbon::parse($account->updated_at)->format('d-m-Y') }}</td>
+                            <td data-label="Kronologi">{{ $account->kronologi }}</td>
+                            <td data-label="Actions" class="text-center">
                                 <a href="{{ route('admin.dangerous_accounts.edit', $account->id) }}"
                                     class="btn btn-warning btn-sm mb-1">
                                     <i class="fas fa-edit" style="color: white;"></i> <!-- Edit Icon -->
                                 </a>
                                 @if(!$account->is_accepted)
                                     <form action="{{ route('admin.dangerous_accounts.accept', $account->id) }}" method="POST"
-                                        style="display:inline-block;">
+                                        class="d-inline-block mb-1">
                                         @csrf
                                         <button type="submit" class="btn btn-success btn-sm mb-1" title="Accept Report">
                                             <i class="fas fa-check"></i> Accept
@@ -83,7 +82,7 @@
                                     </form>
                                 @endif
                                 <form action="{{ route('admin.dangerous_accounts.destroy', $account->id) }}" method="POST"
-                                    style="display:inline-block;"
+                                    class="d-inline-block mb-1"
                                     onsubmit="return confirm('Are you sure you want to delete this dangerous account?');">
                                     @csrf
                                     @method('DELETE')
