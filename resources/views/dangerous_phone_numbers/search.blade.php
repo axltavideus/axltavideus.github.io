@@ -23,21 +23,25 @@
             <div class="card mb-4 p-3 bg-light rounded alert">
                 <h4>Daftar Nomor Telepon Berbahaya</h4>
                 <div class="row">
-                    @foreach($dangerousPhoneNumbers as $phone)
-                    <div class="col-12 col-md-6 col-lg-6 mb-3">
-                        <div class="card h-100 border-warning">
-                            <div class="card-body">
-                                <h5 class="card-title text-kuning">{{ $phone->phone_number }}</h5>
-                                <p class="card-text">{{ $phone->keterangan ?? '-' }}</p>
-                            </div>
-                            <div class="card-footer text-muted">
-                                Dilaporkan: {{ $phone->created_at->format('Y-m-d') }}
-                            </div>
-                        </div>
+            @foreach($dangerousPhoneNumbers as $phone)
+            <div class="col-12 col-md-6 col-lg-6 mb-3">
+                <div class="card h-100 border-warning">
+                    <div class="card-body">
+                        <h5 class="card-title text-kuning">{{ $phone->phone_number }}</h5>
+                        <p class="card-text">{{ $phone->keterangan ?? '-' }}</p>
                     </div>
-                    @endforeach
+                    <div class="card-footer text-muted">
+                        Dilaporkan: {{ $phone->created_at->format('Y-m-d') }}
+                    </div>
                 </div>
             </div>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        {{ $dangerousPhoneNumbers->appends(['search' => $search])->links('pagination::bootstrap-5') }}
+    </div>
         @endif
         
     @endisset

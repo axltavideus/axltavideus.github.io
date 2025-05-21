@@ -153,14 +153,14 @@ $request->validate([
             });
         }
 
-$dangerousAccounts = $query->orderBy($sortBy, $sortOrder)->paginate(10);
+        $dangerousAccounts = $query->orderBy($sortBy, $sortOrder)->paginate(10);
 
-return view('admin.dangerous_accounts.index', [
-    'dangerousAccounts' => $dangerousAccounts,
-    'sortBy' => $sortBy,
-    'sortOrder' => $sortOrder,
-    'search' => $search,
-]);
+        return view('admin.dangerous_accounts.index', [
+            'dangerousAccounts' => $dangerousAccounts,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder,
+            'search' => $search,
+        ]);
     }
 
     public function adminCreate()

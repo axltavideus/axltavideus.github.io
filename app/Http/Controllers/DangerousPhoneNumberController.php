@@ -43,7 +43,7 @@ class DangerousPhoneNumberController extends Controller
                       ->orWhere('keterangan', 'like', '%' . $search . '%');
             }
 
-            $dangerousPhoneNumbers = $query->orderBy('created_at', 'desc')->get();
+            $dangerousPhoneNumbers = $query->orderBy('created_at', 'desc')->paginate(10);
 
             if ($dangerousPhoneNumbers->isEmpty()) {
                 return view('dangerous_phone_numbers.search', [
@@ -61,11 +61,12 @@ class DangerousPhoneNumberController extends Controller
         }
 
         // For GET request, show all dangerous phone numbers initially
-        $dangerousPhoneNumbers = DangerousPhoneNumber::orderBy('created_at', 'desc')->get();
+        $dangerousPhoneNumbers = DangerousPhoneNumber::orderBy('created_at', 'desc')->paginate(10);
 
         return view('dangerous_phone_numbers.search', [
             'dangerousPhoneNumbers' => $dangerousPhoneNumbers,
             'notFound' => false,
+            'search' => '',
         ]);
     }
 
