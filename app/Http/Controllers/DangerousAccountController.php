@@ -132,15 +132,15 @@ $request->validate([
         ];
 
         $sortBy = $request->query('sort_by');
-        $sortOrder = $request->query('sort_order', 'asc');
+        $sortOrder = $request->query('sort_order', 'desc');
         $search = $request->query('search', '');
 
         if (!in_array($sortBy, $sortableFields)) {
-            $sortBy = 'tanggal_kejadian';
+            $sortBy = 'created_at';
         }
 
         if (!in_array(strtolower($sortOrder), ['asc', 'desc'])) {
-            $sortOrder = 'asc';
+            $sortOrder = 'desc';
         }
 
         $query = DangerousAccount::query();
