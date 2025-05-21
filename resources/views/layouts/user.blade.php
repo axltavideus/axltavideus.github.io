@@ -18,12 +18,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cal+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cal+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 
     <link
         href="https://fonts.googleapis.com/css2?family=Erica+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cal+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cal+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -43,7 +47,7 @@
         <div class="main">
             <a href="https://wensteintopup.com/" class="btn-header">
                 <img src="{{ asset('images/ws-topup.png') }}" alt="User Icon">
-                <span>Top Up</span>
+                Top Up
             </a>
             <div class="bx bx-menu" id="menu-icon"></div>
 
@@ -173,7 +177,7 @@
             transition: all .50s ease;
             text-decoration: none;
             letter-spacing: 0.25rem;
-            text-shadow:  0 10px 30px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .navbar a:hover {
@@ -199,6 +203,82 @@
             font-size: 1.1rem;
             font-weight: 500;
             transition: all .50s ease;
+        }
+
+        .main .btn-header {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            height: 60px;
+            width: 200px;
+            /* place-items: right; */
+            margin: 0 35px;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+            background-color: #;
+            font-size: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            justify-content: center;
+        }
+
+        .btn-header img {
+            width: 30px;
+            /* Atur lebar gambar */
+            height: auto;
+            /* Biarkan tinggi otomatis untuk menjaga proporsi */
+            margin-right: 8px;
+            object-fit: contain;
+            /* Menjaga proporsi gambar */
+        }
+
+
+        .main .a .span {
+            text-align: center;
+        }
+
+        .main .btn-header:first-child:hover {
+            background: linear-gradient(90deg, #fa7199, #f5ce62, #e43603, #fa7199);
+            background-size: 400%;
+        }
+
+        .main .btn-header:first-child:before {
+            content: '';
+            position: absolute;
+            background: inherit;
+            top: -5px;
+            right: -5px;
+            bottom: -5px;
+            left: -5px;
+            border-radius: 50px;
+            filter: blur(20px);
+            opacity: 0;
+            transition: opacity 0.5s;
+            place-items: right;
+        }
+
+        .main .btn-header:first-child:hover:before {
+            opacity: 1;
+            z-index: -1;
+        }
+
+        .main .btn-header:hover {
+            z-index: 1;
+            animation: glow 8s linear infinite;
+        }
+
+        @keyframes glow {
+            0% {
+                background-position: 0%;
+            }
+
+            100% {
+                background-position: 400%;
+            }
         }
 
         .user {
