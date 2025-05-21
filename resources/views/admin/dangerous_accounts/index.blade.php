@@ -11,7 +11,8 @@
                 Account</a>
 
             <form method="GET" action="{{ route('admin.dangerous_accounts.index') }}" class="row g-2 mb-3">
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-3">
+                    <label for="search" class="d-block mb-1">&nbsp;</label>
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search..."
                         class="form-control w-100" autocomplete="off">
                 </div>
@@ -26,6 +27,8 @@
                         </option>
                         <option value="korban_nickname" {{ $sortBy == 'korban_nickname' ? 'selected' : '' }}>Korban Nickname
                         </option>
+                        <option value="created_at" {{ $sortBy == 'created_at' ? 'selected' : '' }}>Created At</option>
+                        <option value="updated_at" {{ $sortBy == 'updated_at' ? 'selected' : '' }}>Updated At</option>
                     </select>
                 </div>
                 <div class="col-12 col-md-3">
@@ -35,7 +38,8 @@
                         <option value="desc" {{ $sortOrder == 'desc' ? 'selected' : '' }}>Descending</option>
                     </select>
                 </div>
-                <div class="col-12 col-md-2 d-grid">
+                <div class="col-12 col-md-3">
+                    <label for="submit" class="d-block mb-1">&nbsp;</label>
                     <button type="submit" class="btn btn-warning text-black fw-semibold w-100">Sort</button>
                 </div>
             </form>
@@ -49,7 +53,7 @@
             <p>No dangerous accounts found.</p>
         @else
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
+                <table class="table table-hover align middle">
                     <thead>
                         <tr>
                             <th>ML ID</th>
@@ -70,9 +74,7 @@
                                 <td data-label="Server ID">{{ $account->server_id }}</td>
                                 <td data-label="Pelaku Nickname">{{ $account->pelaku_nickname }}</td>
                                 <td data-label="Korban Nickname">{{ $account->korban_nickname }}</td>
-                                <td data-label="Tanggal Kejadian">
-                                    {{ \Carbon\Carbon::parse($account->tanggal_kejadian)->format('d-m-Y') }}
-                                </td>
+                                <td data-label="Tanggal Kejadian">{{ \Carbon\Carbon::parse($account->tanggal_kejadian)->format('d-m-Y') }}</td>
                                 <td data-label="Created At">{{ \Carbon\Carbon::parse($account->created_at)->format('d-m-Y') }}</td>
                                 <td data-label="Updated At">{{ \Carbon\Carbon::parse($account->updated_at)->format('d-m-Y') }}</td>
                                 <td data-label="Kronologi">{{ $account->kronologi }}</td>
@@ -85,7 +87,7 @@
                                         <form action="{{ route('admin.dangerous_accounts.accept', $account->id) }}" method="POST"
                                             class="d-inline-block mb-1">
                                             @csrf
-                                            <button type="submit" class="btn btn-success btn-sm" title="Accept Report">
+                                            <button type="submit" class="btn btn-success btn-sm mb-1" title="Accept Report">
                                                 <i class="fas fa-check"></i> Accept
                                             </button>
                                         </form>
@@ -104,6 +106,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $dangerousAccounts->appends(request()->query())->links('pagination::bootstrap-5') }}
             </div>
         @endif
     </div>
@@ -114,8 +117,9 @@
     .container {
         margin-top: 20px;
     }
-
-    /* Make table cells stack on very small screens for better mobile view */
+    
+        /* Make table cells stack on very small screens for better mobile view */
+        
     @media (max-width: 575.98px) {
         table.table thead {
             display: none;

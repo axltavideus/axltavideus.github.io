@@ -11,8 +11,8 @@ class GrupJualBeliCardController extends Controller
 {
     public function index()
     {
-        $cards = GrupJualBeliCard::orderBy('order', 'asc')->get();
-        return view('admin.grup_jual_beli_cards.index', compact('cards'));
+$cards = GrupJualBeliCard::orderBy('order', 'asc')->paginate(10);
+return view('admin.grup_jual_beli_cards.index', compact('cards'));
     }
 
     public function create()

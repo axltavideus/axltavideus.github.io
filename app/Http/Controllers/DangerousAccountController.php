@@ -127,18 +127,20 @@ $request->validate([
             'pelaku_nickname',
             'korban_nickname',
             'tanggal_kejadian',
+            'created_at',
+            'updated_at',
         ];
 
         $sortBy = $request->query('sort_by');
-        $sortOrder = $request->query('sort_order', 'asc');
+        $sortOrder = $request->query('sort_order', 'desc');
         $search = $request->query('search', '');
 
         if (!in_array($sortBy, $sortableFields)) {
-            $sortBy = 'tanggal_kejadian';
+            $sortBy = 'created_at';
         }
 
         if (!in_array(strtolower($sortOrder), ['asc', 'desc'])) {
-            $sortOrder = 'asc';
+            $sortOrder = 'desc';
         }
 
         $query = DangerousAccount::query();
@@ -151,7 +153,7 @@ $request->validate([
             });
         }
 
-        $dangerousAccounts = $query->orderBy($sortBy, $sortOrder)->get();
+        $dangerousAccounts = $query->orderBy($sortBy, $sortOrder)->paginate(10);
 
         return view('admin.dangerous_accounts.index', [
             'dangerousAccounts' => $dangerousAccounts,
