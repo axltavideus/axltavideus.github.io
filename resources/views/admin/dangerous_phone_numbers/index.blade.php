@@ -33,7 +33,7 @@
                     <td>{{ $phone->phone_number }}</td>
                     <td>{{ $phone->keterangan }}</td>
                     <td>
-                        <a href="{{ route('admin.dangerous_phone_numbers.edit', $phone->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit" style="color: white;"></i></a>
+                        <a href="{{ route('admin.dangerous_phone_numbers.edit', $phone->id) }}" class="btn btn-sm btn-warning mb-2"><i class="fas fa-edit" style="color: white;"></i></a>
                         <form action="{{ route('admin.dangerous_phone_numbers.destroy', $phone->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this phone number?');">
                             @csrf
                             @method('DELETE')
@@ -44,6 +44,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $dangerousPhoneNumbers->links('pagination::bootstrap-5') }}
     @endif
 </div>
 @endsection

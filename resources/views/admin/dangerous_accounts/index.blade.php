@@ -49,7 +49,7 @@
             <p>No dangerous accounts found.</p>
         @else
             <div class="table-responsive">
-                <table class="table table-hover align-middle">
+                <table class="table table-hover align middle">
                     <thead>
                         <tr>
                             <th>ML ID</th>
@@ -70,9 +70,7 @@
                                 <td data-label="Server ID">{{ $account->server_id }}</td>
                                 <td data-label="Pelaku Nickname">{{ $account->pelaku_nickname }}</td>
                                 <td data-label="Korban Nickname">{{ $account->korban_nickname }}</td>
-                                <td data-label="Tanggal Kejadian">
-                                    {{ \Carbon\Carbon::parse($account->tanggal_kejadian)->format('d-m-Y') }}
-                                </td>
+                                <td data-label="Tanggal Kejadian">{{ \Carbon\Carbon::parse($account->tanggal_kejadian)->format('d-m-Y') }}</td>
                                 <td data-label="Created At">{{ \Carbon\Carbon::parse($account->created_at)->format('d-m-Y') }}</td>
                                 <td data-label="Updated At">{{ \Carbon\Carbon::parse($account->updated_at)->format('d-m-Y') }}</td>
                                 <td data-label="Kronologi">{{ $account->kronologi }}</td>
@@ -85,7 +83,7 @@
                                         <form action="{{ route('admin.dangerous_accounts.accept', $account->id) }}" method="POST"
                                             class="d-inline-block mb-1">
                                             @csrf
-                                            <button type="submit" class="btn btn-success btn-sm" title="Accept Report">
+                                            <button type="submit" class="btn btn-success btn-sm mb-1" title="Accept Report">
                                                 <i class="fas fa-check"></i> Accept
                                             </button>
                                         </form>
@@ -104,6 +102,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                {{ $dangerousAccounts->appends(request()->query())->links('pagination::bootstrap-5') }}
             </div>
         @endif
     </div>
@@ -114,8 +113,9 @@
     .container {
         margin-top: 20px;
     }
-
-    /* Make table cells stack on very small screens for better mobile view */
+    
+        /* Make table cells stack on very small screens for better mobile view */
+        
     @media (max-width: 575.98px) {
         table.table thead {
             display: none;

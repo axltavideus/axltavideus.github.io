@@ -50,6 +50,7 @@
             @endforeach
         </tbody>
     </table>
+    {{ $cards->links('pagination::bootstrap-5') }}
     @else
         <p>No cards found.</p>
     @endif
