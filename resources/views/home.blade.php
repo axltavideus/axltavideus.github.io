@@ -6,8 +6,10 @@
         <div class="content">
             <h1>Cek dan Lapor!<br><span>Cek Keamanan akun kamu secara gratis!</span></h1>
             <p>Web wenstein store tempat kamu cek keamanan akun mu,<br> dan cek keamanan akun yang mau kamu beli </p>
-            <div class="center-btn"> <a href="{{ url('/kasus') }}"><button class="btn-hero"><span><i class="fas fa-search"></i></span> Cek ID
-                    Akun</button></a> <a href="{{ url('/report') }}"><button class="btn-secondary">Lapor</button></a> </div>
+            <div class="center-btn"> <a href="{{ url('/kasus') }}"><button class="btn-hero"><span><i
+                                class="fas fa-search"></i></span> Cek ID
+                        Akun</button></a> <a href="{{ url('/report') }}"><button class="btn-secondary">Lapor</button></a>
+            </div>
         </div>
     </section>
 
@@ -114,7 +116,7 @@
             color: var(--text-color);
             font-family: "Archivo Black", sans-serif;
             /* font-style: italic; */
-            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) ;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
         .hero-section .content p {
@@ -123,6 +125,7 @@
             margin-top: 1rem;
             font-family: 'Inter', sans-serif;
         }
+
 
         .center-btn {
             margin-top: 1.5rem;
@@ -491,6 +494,25 @@
                 autoSlide = setInterval(slideNext, 3000);
             }
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const text = "Cek dan Lapor! Cek Keamanan akun kamu secara gratis!";
+            const typewriterElement = document.getElementById("typewriter");
+            let index = 0;
+
+            function type() {
+                if (index < text.length) {
+                    typewriterElement.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(type, 100); // Adjust typing speed here (in milliseconds)
+                } else {
+                    typewriterElement.classList.add('typewriter'); // Add typewriter class for animation
+                }
+            }
+
+            type();
+        });
+
     </script>
 
 @endsection
