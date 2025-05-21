@@ -15,6 +15,7 @@
         @error('search')
             <div class="text-danger mt-1">{{ $message }}</div>
         @enderror
+
     </form>
 
     @isset($dangerousPhoneNumbers)

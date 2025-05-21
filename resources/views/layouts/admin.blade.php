@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,7 +12,10 @@
             min-height: 100vh;
             display: flex;
             flex-direction: row;
+            overflow-x: hidden;
+            /* Prevent horizontal scroll */
         }
+
         .sidebar {
             width: 250px;
             background-color: #4E4E50;
@@ -20,16 +24,20 @@
             padding-top: 1rem;
             transition: transform 0.3s ease;
         }
+
         .sidebar a {
             color: white;
             text-decoration: none;
             display: block;
             padding: 0.75rem 1.25rem;
         }
-        .sidebar a.active, .sidebar a:hover {
-            background-color:rgb(99, 99, 100);
+
+        .sidebar a.active,
+        .sidebar a:hover {
+            background-color: rgb(99, 99, 100);
             color: #ffc107;
         }
+
         .content {
             flex-grow: 1;
             padding: 1rem 2rem;
@@ -85,6 +93,66 @@
             .close-sidebar {
                 display: block;
             }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                transform: translateX(-100%);
+                z-index: 1050;
+                /* higher than backdrop */
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+                box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+            }
+
+            .toggle-sidebar {
+                display: block;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 1100;
+                border: none;
+                font-size: 1.5rem;
+                background-color: #ffc107;
+                color: #333;
+                width: 40px;
+                height: 40px;
+                border-radius: 4px;
+                cursor: pointer;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            }
+
+            .content {
+                padding: 1rem;
+            }
+
+            /* Add backdrop for sidebar */
+            .sidebar-backdrop {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.4);
+                z-index: 1040;
+                display: none;
+            }
+
+            .sidebar-backdrop.active {
+                display: block;
+            }
+        }
+
+        .toggle-sidebar {
+            display: none;
         }
     </style>
 </head>

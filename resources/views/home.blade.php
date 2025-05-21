@@ -424,6 +424,10 @@
                 box-shadow: none;
             }
 
+            .step-card {
+                margin-bottom: 20px;
+            }
+
             .card-list-custom {
                 flex-wrap: nowrap;
                 overflow-x: scroll;

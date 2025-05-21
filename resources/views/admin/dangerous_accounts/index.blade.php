@@ -10,28 +10,34 @@
             <a href="{{ route('admin.dangerous_accounts.create') }}" class="btn btn-warning mb-3">Add New Dangerous
                 Account</a>
 
-            <form method="GET" action="{{ route('admin.dangerous_accounts.index') }}"
-                class="d-flex align-items-center gap-2 mb-3">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Search..."
-                    class="form-control" style="width: 200px;">
-                <label for="sort_by" class="fw-semibold text-warning">Sort By:</label>
-                <select name="sort_by" id="sort_by" class="form-select" style="width: auto;">
-                    <option value="tanggal_kejadian" {{ $sortBy == 'tanggal_kejadian' ? 'selected' : '' }}>Tanggal Kejadian
-                    </option>
-                    <option value="ml_id" {{ $sortBy == 'ml_id' ? 'selected' : '' }}>ML ID</option>
-                    <option value="server_id" {{ $sortBy == 'server_id' ? 'selected' : '' }}>Server ID</option>
-                    <option value="pelaku_nickname" {{ $sortBy == 'pelaku_nickname' ? 'selected' : '' }}>Pelaku Nickname
-                    </option>
-                    <option value="korban_nickname" {{ $sortBy == 'korban_nickname' ? 'selected' : '' }}>Korban Nickname
-                    </option>
-                </select>
-
-                <select name="sort_order" id="sort_order" class="form-select" style="width: auto;">
-                    <option value="asc" {{ $sortOrder == 'asc' ? 'selected' : '' }}>Ascending</option>
-                    <option value="desc" {{ $sortOrder == 'desc' ? 'selected' : '' }}>Descending</option>
-                </select>
-
-                <button type="submit" class="btn btn-warning text-black fw-semibold px-4 py-2">Sort</button>
+            <form method="GET" action="{{ route('admin.dangerous_accounts.index') }}" class="row g-2 mb-3">
+                <div class="col-12 col-md-4">
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search..."
+                        class="form-control w-100" autocomplete="off">
+                </div>
+                <div class="col-12 col-md-3">
+                    <label for="sort_by" class="fw-semibold text-warning d-block mb-1">Sort By:</label>
+                    <select name="sort_by" id="sort_by" class="form-select w-100">
+                        <option value="tanggal_kejadian" {{ $sortBy == 'tanggal_kejadian' ? 'selected' : '' }}>Tanggal
+                            Kejadian</option>
+                        <option value="ml_id" {{ $sortBy == 'ml_id' ? 'selected' : '' }}>ML ID</option>
+                        <option value="server_id" {{ $sortBy == 'server_id' ? 'selected' : '' }}>Server ID</option>
+                        <option value="pelaku_nickname" {{ $sortBy == 'pelaku_nickname' ? 'selected' : '' }}>Pelaku Nickname
+                        </option>
+                        <option value="korban_nickname" {{ $sortBy == 'korban_nickname' ? 'selected' : '' }}>Korban Nickname
+                        </option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-3">
+                    <label for="sort_order" class="d-block mb-1">&nbsp;</label>
+                    <select name="sort_order" id="sort_order" class="form-select w-100">
+                        <option value="asc" {{ $sortOrder == 'asc' ? 'selected' : '' }}>Ascending</option>
+                        <option value="desc" {{ $sortOrder == 'desc' ? 'selected' : '' }}>Descending</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-2 d-grid">
+                    <button type="submit" class="btn btn-warning text-black fw-semibold w-100">Sort</button>
+                </div>
             </form>
         </div>
 
@@ -70,8 +76,8 @@
                                 <td data-label="Kronologi">{{ $account->kronologi }}</td>
                                 <td data-label="Actions" class="text-center">
                                     <a href="{{ route('admin.dangerous_accounts.edit', $account->id) }}"
-                                        class="btn btn-warning btn-sm mb-1">
-                                        <i class="fas fa-edit" style="color: white;"></i> <!-- Edit Icon -->
+                                        class="btn btn-warning btn-sm mb-1" title="Edit">
+                                        <i class="fas fa-edit text-white"></i>
                                     </a>
                                     @if(!$account->is_accepted)
                                         <form action="{{ route('admin.dangerous_accounts.accept', $account->id) }}" method="POST"
@@ -87,8 +93,8 @@
                                         onsubmit="return confirm('Are you sure you want to delete this dangerous account?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm mb-1">
-                                            <i class="fas fa-trash"></i> <!-- Delete Icon -->
+                                        <button type="submit" class="btn btn-danger btn-sm" title="Delete">
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
                                 </td>
@@ -103,11 +109,13 @@
 @endsection
 
 <style>
+    /* Additional custom styles */
     .container {
         margin-top: 20px;
     }
-
+    
         /* Make table cells stack on very small screens for better mobile view */
+        
     @media (max-width: 575.98px) {
         table.table thead {
             display: none;
