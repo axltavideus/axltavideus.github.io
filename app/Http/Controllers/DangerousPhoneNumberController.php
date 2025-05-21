@@ -59,7 +59,13 @@ class DangerousPhoneNumberController extends Controller
             ]);
         }
 
-        return view('dangerous_phone_numbers.search');
+        // For GET request, show all dangerous phone numbers initially
+        $dangerousPhoneNumbers = DangerousPhoneNumber::orderBy('created_at', 'desc')->get();
+
+        return view('dangerous_phone_numbers.search', [
+            'dangerousPhoneNumbers' => $dangerousPhoneNumbers,
+            'notFound' => false,
+        ]);
     }
 
     public function adminCreate()

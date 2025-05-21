@@ -18,10 +18,12 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cal+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <link
         href="https://fonts.googleapis.com/css2?family=Erica+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cal+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -32,7 +34,7 @@
             </div>
         </a>
         <ul class="navbar">
-            <li><a href="{{ url('') }}" class="active">Home</a></li>
+            <li><a href="{{ url('') }}">Home</a></li>
             <li><a href="{{ url('/kasus') }}">Kasus</a></li>
             <li><a href="{{ url('/report') }}">Lapor</a></li>
             <li><a href="{{ url('/dangerous-phone-numbers/search') }}">Nomor Penipu</a></li>
@@ -162,14 +164,16 @@
         }
 
         .navbar a {
-            font-family: 'Erica One', cursive;
+            font-family: 'Cal Sans', sans-serif;
             color: var(--text-color);
             font-size: 1.1rem;
-            font-weight: 500;
+            font-weight: 600;
             padding: 5px 0;
             margin: 0px 30px;
             transition: all .50s ease;
             text-decoration: none;
+            letter-spacing: 0.25rem;
+            text-shadow:  0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .navbar a:hover {
