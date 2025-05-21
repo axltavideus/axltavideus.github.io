@@ -127,6 +127,8 @@ $request->validate([
             'pelaku_nickname',
             'korban_nickname',
             'tanggal_kejadian',
+            'created_at',
+            'updated_at',
         ];
 
         $sortBy = $request->query('sort_by');
