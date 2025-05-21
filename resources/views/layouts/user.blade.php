@@ -47,7 +47,7 @@
         <div class="main">
             <a href="https://wensteintopup.com/" class="btn-header">
                 <img src="{{ asset('images/ws-topup.png') }}" alt="User Icon">
-                <span>Top Up</span>
+                Top Up
             </a>
             <div class="bx bx-menu" id="menu-icon"></div>
 
@@ -206,26 +206,79 @@
         }
 
         .main .btn-header {
+            position: relative;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
             height: 60px;
             width: 200px;
-            place-items: center;
+            /* place-items: right; */
             margin: 0 35px;
             border-radius: 50px;
             border: none;
             outline: none;
-            background-color: #4E4E50;
+            background-color: #;
             font-size: 20px;
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
+            justify-content: center;
+        }
+
+        .btn-header img {
+            width: 30px;
+            /* Atur lebar gambar */
+            height: auto;
+            /* Biarkan tinggi otomatis untuk menjaga proporsi */
+            margin-right: 8px;
+            object-fit: contain;
+            /* Menjaga proporsi gambar */
+        }
+
+
+        .main .a .span {
+            text-align: center;
         }
 
         .main .btn-header:first-child:hover {
             background: linear-gradient(90deg, #fa7199, #f5ce62, #e43603, #fa7199);
+            background-size: 400%;
+        }
+
+        .main .btn-header:first-child:before {
+            content: '';
+            position: absolute;
+            background: inherit;
+            top: -5px;
+            right: -5px;
+            bottom: -5px;
+            left: -5px;
+            border-radius: 50px;
+            filter: blur(20px);
+            opacity: 0;
+            transition: opacity 0.5s;
+            place-items: right;
+        }
+
+        .main .btn-header:first-child:hover:before {
+            opacity: 1;
+            z-index: -1;
+        }
+
+        .main .btn-header:hover {
+            z-index: 1;
+            animation: glow 8s linear infinite;
+        }
+
+        @keyframes glow {
+            0% {
+                background-position: 0%;
+            }
+
+            100% {
+                background-position: 400%;
+            }
         }
 
         .user {
