@@ -72,9 +72,9 @@
                 <h3>Quick Links</h3>
                 <ul>
                     <li><i class="fa-solid fa-arrow-right"></i><a href="/">Home</a></li>
-                    <li><i class="fa-solid fa-arrow-right"></i><a href="/about">About</a></li>
-                    <li><i class="fa-solid fa-arrow-right"></i><a href="/services">Services</a></li>
-                    <li><i class="fa-solid fa-arrow-right"></i><a href="/contact">Contact</a></li>
+                    <li><i class="fa-solid fa-arrow-right"></i><a href="/kasus">Kasus</a></li>
+                    <li><i class="fa-solid fa-arrow-right"></i><a href="/report">Lapor</a></li>
+                    <li><i class="fa-solid fa-arrow-right"></i><a href="/contacts">Contacts</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -319,42 +319,101 @@
         @media (max-width: 1090px) {
             #menu-icon {
                 display: block;
+                cursor: pointer;
+                /* Menambahkan kursor pointer untuk interaksi */
             }
 
             .navbar {
-                position: absolute;
-                top: 100%;
-                right: -100%;
-                width: 270px;
-                height: 32vh;
-                background: var(--main-color);
+                position: fixed;
+                /* Mengubah posisi menjadi fixed agar tetap terlihat saat scroll */
+                top: 0;
+                /* Menempatkan navbar di atas */
+                right: -300px;
+                /* Menyembunyikan navbar di luar layar */
+                width: 250px;
+                /* Lebar sidebar */
+                height: 100%;
+                /* Mengisi tinggi layar */
+                background: rgb(106, 106, 127);
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
-                border-radius: 10px;
-                transition: all .50s ease;
+                /* Menyusun elemen dari atas ke bawah */
+                box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+                /* Menambahkan bayangan untuk efek kedalaman */
+                transition: right 0.3s ease;
+                /* Memperhalus transisi */
+                z-index: 1000;
+                /* Memastikan navbar berada di atas elemen lain */
+                padding: 20px;
+                /* Menambahkan padding di dalam navbar */
+            }
+
+            .sidebar-logo {
+                width: 100%;
+                /* Memastikan logo mengambil lebar penuh */
+                display: flex;
+                justify-content: flex-end;
+                /* Mengatur logo ke kanan */
+                margin-bottom: 20px;
+                /* Jarak antara logo dan link */
+            }
+
+            .navbar img.logo-img {
+                height: 50px;
+                /* Ukuran logo */
+            }
+
+            .navbar ul {
+                list-style: none;
+                /* Menghapus bullet points */
+                padding: 0;
+                /* Menghapus padding default */
+                width: 100%;
+                /* Memastikan ul mengambil lebar penuh */
+                display: flex;
+                flex-direction: column;
+                /* Menyusun link secara vertikal */
+                align-items: flex-end;
+                /* Mengatur link ke kanan */
             }
 
             .navbar a {
                 display: block;
-                margin: 5px 0px;
-                padding: 0px 25px;
-                transition: all .50 ease;
+                margin: 15px 0;
+                /* Menambah jarak antar link */
+                padding: 10px 20px;
+                /* Menambah padding untuk link */
+                color: white;
+                /* Mengubah warna teks menjadi putih */
+                text-decoration: none;
+                /* Menghapus garis bawah */
+                transition: background 0.3s ease;
+                /* Memperhalus transisi latar belakang */
+                width: 100%;
+                /* Memastikan link mengambil lebar penuh */
+                text-align: right;
+                /* Mengatur teks ke kanan */
             }
 
             .navbar a:hover {
-                color: var(--text-color);
-                transform: translateY(10px);
+                background: rgba(255, 255, 255, 0.2);
+                /* Menambahkan efek latar belakang saat hover */
+                transform: translateY(-2px);
+                /* Sedikit mengangkat link saat hover */
             }
 
             .navbar a.active {
-                color: var(--text-color);
+                background: rgba(255, 255, 255, 0.3);
+                /* Menandai link aktif dengan latar belakang */
             }
 
             .navbar.open {
-                right: 2%;
+                right: 0;
+                /* Menampilkan navbar saat terbuka */
             }
         }
+
 
 
         footer {
