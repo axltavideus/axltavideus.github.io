@@ -15,37 +15,6 @@
         @error('search')
             <div class="text-danger mt-1">{{ $message }}</div>
         @enderror
-    </form>
-
-    @isset($dangerousPhoneNumbers)
-        @if($dangerousPhoneNumbers && !$notFound)
-            <div class="card mb-4 p-3 bg-light border border-warning rounded alert">
-                <h4>Daftar Nomor Telepon Berbahaya</h4>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nomor Telepon</th>
-                            <th>Keterangan</th>
-                            <th>Tanggal Dilaporkan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($dangerousPhoneNumbers as $phone)
-                        <tr>
-                            <td>{{ $phone->phone_number }}</td>
-                            <td>{{ $phone->keterangan ?? '-' }}</td>
-                            <td>{{ $phone->created_at->format('Y-m-d') }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @endif
-    @endisset
-
-    @if(isset($notFound) && $notFound)
-        <div class="alert alert-danger">
-            Nomor telepon tidak ditemukan untuk input yang dimasukkan.
         </div>
     @endif
 </div>
