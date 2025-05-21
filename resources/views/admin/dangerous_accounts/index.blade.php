@@ -11,7 +11,8 @@
                 Account</a>
 
             <form method="GET" action="{{ route('admin.dangerous_accounts.index') }}" class="row g-2 mb-3">
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-3">
+                    <label for="search" class="d-block mb-1">&nbsp;</label>
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Search..."
                         class="form-control w-100" autocomplete="off">
                 </div>
@@ -26,6 +27,8 @@
                         </option>
                         <option value="korban_nickname" {{ $sortBy == 'korban_nickname' ? 'selected' : '' }}>Korban Nickname
                         </option>
+                        <option value="created_at" {{ $sortBy == 'created_at' ? 'selected' : '' }}>Created At</option>
+                        <option value="updated_at" {{ $sortBy == 'updated_at' ? 'selected' : '' }}>Updated At</option>
                     </select>
                 </div>
                 <div class="col-12 col-md-3">
@@ -35,7 +38,8 @@
                         <option value="desc" {{ $sortOrder == 'desc' ? 'selected' : '' }}>Descending</option>
                     </select>
                 </div>
-                <div class="col-12 col-md-2 d-grid">
+                <div class="col-12 col-md-3">
+                    <label for="submit" class="d-block mb-1">&nbsp;</label>
                     <button type="submit" class="btn btn-warning text-black fw-semibold w-100">Sort</button>
                 </div>
             </form>
